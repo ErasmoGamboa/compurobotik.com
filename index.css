@@ -617,6 +617,7 @@ body.dark-mode .theme-toggle-btn .moon-icon {
 }
 
 .hero-glow {
+    max-width: 100%;
     background: radial-gradient(#d45a004d 0%, #0000 70%);
     border-radius: 50%;
     width: 420px;
@@ -903,13 +904,13 @@ body.dark-mode .theme-toggle-btn .moon-icon {
     overflow: hidden
 }
 
-@media (width<=900px) {
+@media (max-width: 900px) {
     .carousel-slide {
         flex: 0 0 calc(50% - 10px)
     }
 }
 
-@media (width<=600px) {
+@media (max-width: 600px) {
     .carousel-slide {
         flex: 0 0 100%
     }
@@ -1354,13 +1355,13 @@ body.dark-mode .testimonial-author strong {
     font-size: .75rem
 }
 
-@media (width<=900px) {
+@media (max-width: 900px) {
     .testimonials-grid {
         grid-template-columns: repeat(2, 1fr)
     }
 }
 
-@media (width<=600px) {
+@media (max-width: 600px) {
     .testimonials-grid {
         grid-template-columns: 1fr
     }
@@ -1660,7 +1661,7 @@ body.dark-mode .wa-cta-text p {
     transform: translate(0)
 }
 
-@media (width<=900px) {
+@media (max-width: 900px) {
     :root {
         --section-pad: 60px
     }
@@ -1866,7 +1867,7 @@ body.dark-mode .wa-cta-text p {
     }
 }
 
-@media (width<=600px) {
+@media (max-width: 600px) {
     :root {
         --section-pad: 48px
     }
@@ -2240,8 +2241,8 @@ body.dark-mode .wa-cta-text p {
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     font-size: 1.1rem;
     font-weight: 800;
     transition: background .15s;
@@ -2486,8 +2487,8 @@ body.dark-mode .cart-motivation {
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     font-size: 1.2rem;
     font-weight: 900;
     line-height: 1;
@@ -3123,7 +3124,7 @@ body.dark-mode #timer-clock {
     border-color: #5a3010
 }
 
-@media (width<=780px) {
+@media (max-width: 780px) {
     .modal-grid {
         grid-template-columns: 1fr
     }
@@ -3376,21 +3377,21 @@ body.dark-mode #timer-clock {
     transform: translateY(-1px)
 }
 
-@media (width<=1100px) {
+@media (max-width: 1100px) {
     .catalog-unified-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 18px
     }
 }
 
-@media (width<=780px) {
+@media (max-width: 780px) {
     .catalog-unified-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px
     }
 }
 
-@media (width<=540px) {
+@media (max-width: 540px) {
     .catalog-unified-grid {
         grid-template-columns: 1fr;
         gap: 14px
@@ -3411,7 +3412,7 @@ body.dark-mode #timer-clock {
     }
 }
 
-@media (width<=360px) {
+@media (max-width: 360px) {
     .catalog-unified-grid {
         gap: 12px
     }
@@ -3652,8 +3653,8 @@ body.dark-mode .checkout-field input:focus {
 }
 
 .flavor-btn {
-    width: 28px;
-    height: 28px;
+    width: 36px;
+    height: 36px;
     color: var(--accent);
     cursor: pointer;
     background: #fff;
@@ -3745,7 +3746,7 @@ body.dark-mode .flavor-price {
     border-color: #6a3010
 }
 
-@media (width<=540px) {
+@media (max-width: 540px) {
     .flavor-label {
         font-size: .8rem
     }
@@ -3754,5 +3755,35 @@ body.dark-mode .flavor-price {
         width: 26px;
         height: 26px;
         font-size: 1rem
+    }
+}
+
+
+/* --- CORRECCIONES PARA DISPOSITIVOS TÁCTILES (iOS/Android) --- */
+/* Deshabilita los efectos "hover" perjudiciales en pantallas táctiles para que al tocar los productos y elementos funcionen a la primera, en lugar de requerir un "doble tap" */
+@media (hover: none) {
+    .product-card:hover { 
+        transform: none; 
+        box-shadow: 0 4px 24px #0000000f; 
+    }
+    .catalog-product-card:hover { 
+        transform: translateZ(0); 
+        box-shadow: 0 4px 20px #0000000f; 
+        border-color: #0000000d; 
+    }
+    .price-card:hover { 
+        transform: none; 
+        box-shadow: 0 4px 24px #0000000f; 
+        border-color: #0000; 
+    }
+    .price-card.popular-card:hover {
+        transform: scale(1.05); 
+    }
+    .testimonial-card:hover { 
+        transform: none; 
+        box-shadow: 1px solid #0000000d; 
+    }
+    .schedule-card:hover {
+        transform: none;
     }
 }
