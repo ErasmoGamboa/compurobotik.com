@@ -27,79 +27,45 @@ r.length > 0 && r.forEach(e => {
     r.forEach(e => e.classList.remove(`active`)), e.classList.add(`active`);
     let t = e.dataset.category;
     i(t);
-    let n = {
-      "cat-yl-fresa-fresa": { name: `Yogurt Líquido 🍓 Fresa`, price: 7 },
-      "cat-yl-fresa-ciruela": { name: `Yogurt Líquido 🟣 Ciruela Pasas`, price: 7 },
-      "cat-yl-pina-pina": { name: `Yogurt Líquido 🍍 Piña`, price: 7 },
-      "cat-yl-pina-durazno": { name: `Yogurt Líquido 🍑 Durazno`, price: 7 },
-      "cat-helado-coco-parchita": { name: `Helado 🥥 Coco & 🟡 Parchita`, price: 1 },
-      "cat-helado-chocolate": { name: `Helado 🍫 Chocolate`, price: 1 },
-      "cat-helado-coco-choco": { name: `Helado 🥥 Coco & 🍫 Chocolate`, price: 1 },
-      "cat-helado-fresa": { name: `Helado 🍓 Fresa`, price: 1 },
-      "cat-helado-nutella": { name: `Helado 🟡 Parchita, 🌰 Nutella & 🍪 Galleta`, price: 1 },
-      "cat-helado-oreo": { name: `Helado 🍪 Oreo & 🍮 Dulce de Leche`, price: 1 }
-    };
-    document.querySelectorAll(`.flavor-btn`).forEach(e => {
-      e.addEventListener(`click`, t => {
-        t.stopPropagation();
-        let r = e.dataset.flavor,
-          i = n[r];
-        if (!i) return;
-        let a = document.querySelector(`.flavor-qty[data-flavor="${r}"]`),
-          o = parseInt(a.textContent) || 0;
-        if (e.classList.contains(`plus`)) o++, cart.push({ name: i.name, price: i.price }), A(), renderCart(), showToast(`✅ ${i.name} añadido al pedido`);
-        else if (o > 0) {
-          o--;
-          let e = cart.findLastIndex ? cart.findLastIndex(e => e.name === i.name) : cart.map(e => e.name).lastIndexOf(i.name);
-          e !== -1 && (cart.splice(e, 1), A(), renderCart())
-        }
-        a.textContent = o;
-        let s = document.querySelector(`.flavor-btn.minus[data-flavor="${r}"]`);
-        s && (s.disabled = o === 0)
-      })
-    }), document.querySelectorAll(`.flavor-btn.minus`).forEach(e => e.disabled = !0)
   })
 });
+
 function i(e) {
   document.querySelectorAll(`.catalog-product-card`).forEach(t => {
-    let n = D[{
-      "cat-kefir": `Kéfir de Leche (1 lt)`,
-      "cat-smoothie": `Smoothie de Fresa 🍓`,
-      "cat-yogurt-liquido": `Yogurt Líquido (1 lt)`,
-      "cat-yogurt-griego": `Yogurt Griego 755g`,
-      "cat-marquesa": `Marquesa con Yogurt Griego`,
-      "cat-bowl": `Bowl de Yogurt Griego`,
-      "cat-parfait-8oz": `Parfait 8oz - Fresa 🍓`,
-      "cat-parfait-14oz": `Parfait Grande 14oz (550g)`,
-      "cat-tetas": `Tetas de Yogurt`,
-      "cat-helados": `Helados de Frutas`
-    }[t.id]];
-    e === `all` || n && n.category === e ? (t.style.display = `block`, t.classList.remove(`visible`), requestAnimationFrame(() => t.classList.add(`visible`))) : t.style.display = `none`
+    // Si decides usar categorías en un futuro, se definen aquí
+    t.style.display = `block`;
+    t.classList.remove(`visible`);
+    requestAnimationFrame(() => t.classList.add(`visible`));
   })
 }
+
 var a = document.getElementById(`product-modal-overlay`),
   o = document.getElementById(`close-modal`);
 document.getElementById(`modal-img`), document.getElementById(`modal-title`), document.getElementById(`modal-rating`), document.getElementById(`modal-price`), document.getElementById(`modal-description`), document.getElementById(`modal-benefits`), document.getElementById(`modal-badge`), document.getElementById(`modal-atc-btn`);
+
 function s() {
   a.classList.remove(`visible`)
 }
+
 o && o.addEventListener(`click`, s), window.addEventListener(`click`, e => {
   e.target === a && s()
 });
+
 function c() {
   let e = Object.keys(D),
     t = e[Math.floor(Math.random() * e.length)],
-    n = [`Sierra Parima`, `Casco Central`, `Sector Norte`, `Residencias El Sol`],
+    n = [`Caracas`, `Valencia`, `Maracay`, `Barquisimeto`, `Margarita`],
     r = n[Math.floor(Math.random() * n.length)],
     i = document.querySelector(`.sales-toast`);
   i && i.remove();
   let a = document.createElement(`div`);
-  a.className = `sales-toast`, a.innerHTML = `🔥 ¡Alguien en <strong>${r}</strong> acaba de pedir <strong>${t}</strong>! 🍨`, document.body.appendChild(a), requestAnimationFrame(() => {
+  a.className = `sales-toast`, a.innerHTML = `🔥 ¡Alguien en <strong>${r}</strong> acaba de pedir <strong>${t}</strong>! 💻`, document.body.appendChild(a), requestAnimationFrame(() => {
     requestAnimationFrame(() => a.classList.add(`show`))
   }), setTimeout(() => {
     a.classList.remove(`show`), setTimeout(() => a.remove(), 400)
   }, 4e3)
 }
+
 setInterval(c, Math.random() * 24e4 + 48e4);
 var l = !1;
 window.addEventListener(`scroll`, () => {
@@ -116,6 +82,7 @@ window.addEventListener(`scroll`, () => {
     n.classList.remove(`open`), t && (t.classList.remove(`active`), t.setAttribute(`aria-expanded`, `false`)), e && e.classList.remove(`menu-open`), document.body.style.overflow = ``
   })
 });
+
 var u = document.getElementById(`nav-whatsapp-btn`);
 u && u.addEventListener(`click`, r => {
   let i = u.getAttribute(`href`);
@@ -129,7 +96,7 @@ u && u.addEventListener(`click`, r => {
     let s = document.querySelector(`.sales-toast`);
     s && s.remove();
     let c = document.createElement(`div`);
-    c.className = `sales-toast`, c.innerHTML = `¡Selecciona tus favoritos y arma tu pedido aquí! 🍨`, document.body.appendChild(c), requestAnimationFrame(() => {
+    c.className = `sales-toast`, c.innerHTML = `¡Selecciona tu software y arma tu pedido aquí! 💻`, document.body.appendChild(c), requestAnimationFrame(() => {
       requestAnimationFrame(() => c.classList.add(`show`))
     }), setTimeout(() => {
       c.classList.remove(`show`), setTimeout(() => c.remove(), 400)
@@ -138,12 +105,13 @@ u && u.addEventListener(`click`, r => {
 }), document.addEventListener(`click`, r => {
   e && n && t && !e.contains(r.target) && n.classList.contains(`open`) && (n.classList.remove(`open`), t.classList.remove(`active`), e.classList.remove(`menu-open`), t.setAttribute(`aria-expanded`, `false`), document.body.style.overflow = ``)
 });
+
 var d = document.getElementById(`hero-order-btn`);
 d && d.addEventListener(`click`, () => {
   let t = document.querySelector(`.sales-toast`);
   t && t.remove();
   let n = document.createElement(`div`);
-  n.className = `sales-toast`, n.innerHTML = `¡Selecciona tus favoritos y arma tu pedido aquí! 🍨`, document.body.appendChild(n), requestAnimationFrame(() => {
+  n.className = `sales-toast`, n.innerHTML = `¡Selecciona tus favoritos y arma tu pedido aquí! 💻`, document.body.appendChild(n), requestAnimationFrame(() => {
     requestAnimationFrame(() => n.classList.add(`show`))
   }), setTimeout(() => {
     n.classList.remove(`show`), setTimeout(() => n.remove(), 400)
@@ -155,6 +123,7 @@ d && d.addEventListener(`click`, () => {
     window.scrollTo({ top: n, behavior: `smooth` })
   }
 });
+
 var f = () => {
   document.querySelectorAll(`.carousel-container`).forEach(e => {
     let t = e.querySelector(`.carousel-track`),
@@ -190,6 +159,7 @@ var f = () => {
       e.classList.add(`fade-in`), e.style.transitionDelay = `${t % 3 * .15}s`, p.observe(e)
     })
   };
+
 document.querySelectorAll(`a[href^="#"]`).forEach(t => {
   t.addEventListener(`click`, function (t) {
     let n = this.getAttribute(`href`);
@@ -203,6 +173,7 @@ document.querySelectorAll(`a[href^="#"]`).forEach(t => {
     }
   })
 });
+
 var h = document.getElementById(`floating-wa`);
 if (h) {
   let e = !1;
@@ -212,6 +183,7 @@ if (h) {
     }), !0)
   }, { passive: !0 }), h.style.opacity = `0`, h.style.transform = `scale(0.8)`
 }
+
 var g = document.getElementById(`lang-toggle`),
   _ = localStorage.getItem(`shilis_lang`) || `ES`,
   v = e => {
@@ -242,12 +214,14 @@ if (g) {
 _ === `EN` && v(_), window.addEventListener(`DOMContentLoaded`, () => {
   _ === `EN` && v(_)
 }, { once: !0 });
+
 var y = `shilis_analytics`;
 function b(e, t = {}) {
   let n = JSON.parse(localStorage.getItem(y) || `{}`),
     r = n[e] || { count: 0, details: {} };
   r.count++, t.id && (r.details[t.id] = (r.details[t.id] || 0) + 1), n[e] = r, localStorage.setItem(y, JSON.stringify(n))
 }
+
 var x = document.getElementById(`theme-toggle`);
 x && x.querySelector(`.moon-icon`);
 var S = `<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:#F59E0B;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
@@ -257,8 +231,10 @@ localStorage.getItem(`shilis_theme`) === `dark` && (document.body.classList.add(
   let e = document.body.classList.contains(`dark-mode`);
   x.innerHTML = e ? S : C, localStorage.setItem(`shilis_theme`, e ? `dark` : `light`)
 });
-var w = { "Topping Especial": { price: .5, emoji: `✨` } },
-  T = { "Parfait 8oz": [`Topping Especial`], "Parfait 14oz": [`Topping Especial`], "Parfait Grande 550g": [`Topping Especial`], "Bowl de Yogurt Griego": [`Topping Especial`], "Marquesa con Yogurt Griego": [`Topping Especial`] };
+
+// Modificado el Topping por si alguna vez quieres ofrecer Asistencia Remota adicional
+var w = { "Soporte Remoto VIP": { price: 5, emoji: `💻` } },
+  T = { "Windows 11 Profesional": [`Soporte Remoto VIP`], "Windows 10 Professional": [`Soporte Remoto VIP`] };
 function E(e) {
   let t = T[e];
   if (!t) return;
@@ -272,7 +248,7 @@ function E(e) {
     <div class="topping-toast-content">
       <span class="topping-emoji">${a.emoji}</span>
       <div class="topping-text">
-        <p><strong>${_ === `EN` ? `Add a twist!` : `¡Dale un toque extra!`}</strong></p>
+        <p><strong>${_ === `EN` ? `Add remote support!` : `¡Asegura tu instalación!`}</strong></p>
         <p>${_ === `EN` ? `Add ${i} for only $${a.price}` : `Añade ${i} por solo $${a.price}`}</p>
       </div>
       <div class="topping-actions">
@@ -290,17 +266,19 @@ function E(e) {
     r.parentElement && (r.classList.remove(`show`), setTimeout(() => r.remove(), 300))
   }, 6e3)
 }
-var D = { 
-  "Yogurt Líquido 🍓 Fresa": { price: 7, emoji: `🧃`, category: `yogurt_liquido`, rating: 4.6, reviews: 40, badge: null, stockStatus: `normal`, description: `Yogurt líquido natural con sabor a 🍓fresa.`, benefits: [`Fácil de Beber`, `Sabor Frutal`], gallery: [`imagenes/Shilis_Yogurt_liquido_fresayciruela.webp`] }, 
-  "Windows 11 Profesional": { price: 12, emoji: `💻` }, 
+
+var D = {
+  "Windows 11 Profesional": { price: 12, emoji: `💻` },
   "Windows 10 Professional": { price: 12, emoji: `💻` },
-  "🍦 Tetas de Yogurt": { price: 1, emoji: `🍦` } 
+  "Microsoft Office 2021": { price: 15, emoji: `💿` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
+
 function A() {
   localStorage.setItem(`shilis_cart`, JSON.stringify(k))
 }
+
 var j = document.getElementById(`cart-badge`),
   M = document.getElementById(`nav-cart-badge`),
   N = document.getElementById(`nav-cart-btn`),
@@ -310,12 +288,14 @@ var j = document.getElementById(`cart-badge`),
   L = document.getElementById(`floating-cart`),
   R = document.getElementById(`close-cart`),
   z = document.getElementById(`checkout-btn`);
+
 function B() {
   return Object.entries(k).reduce((e, [t, n]) => {
     let r = D[t];
     return e + (r ? r.price * n : 0)
   }, 0)
 }
+
 function V() {
   let e = 0;
   if (I) {
@@ -325,12 +305,12 @@ function V() {
         <div class="empty-cart">
           <div class="empty-cart-icon">🛒</div>
           <p data-en="Your cart is empty" data-es="Tu carrito está vacío">${_ === `EN` ? `Your cart is empty` : `Tu carrito está vacío`}</p>
-          <p class="empty-cart-hint" data-en="Add your favorite software" data-es="Agrega tus programas favoritos">${_ === `EN` ? `Add your favorite products` : `Agrega tus productos favoritos`}</p>
+          <p class="empty-cart-hint" data-en="Add your favorite software" data-es="Agrega tus programas favoritos">${_ === `EN` ? `Add your favorite products` : `Agrega tus programas favoritos`}</p>
         </div>`;
     else {
       t.forEach(([t, n]) => {
         e += n;
-        let r = D[t] || { price: 0, emoji: `🍦` },
+        let r = D[t] || { price: 0, emoji: `💻` },
           i = (r.price * n).toFixed(2),
           a = document.createElement(`div`);
         a.className = `cart-item`, a.innerHTML = `
@@ -361,8 +341,8 @@ function V() {
       let i = document.createElement(`div`);
       if (i.className = `cart-motivation`, n < 10) {
         let e = (10 - n).toFixed(2);
-        i.innerHTML = _ === `EN` ? `<span data-en="📦 Add <strong>$${e} more</strong> and your order arrives super fresh 🎉" data-es="📦 Añade <strong>$${e} más</strong> y tu pedido llega super fresco 🎉">📦 Add <strong>$${e} more</strong> and your order arrives super fresh 🎉</span>` : `<span data-en="📦 Add <strong>$${e} more</strong> and your order arrives super fresh 🎉" data-es="📦 Añade <strong>$${e} más</strong> y tu pedido llega super fresco 🎉">📦 Añade <strong>$${e} más</strong> y tu pedido llega super fresco 🎉</span>`
-      } else n < 20 ? i.innerHTML = _ === `EN` ? `<span data-en="⭐ Excellent choice! You can add another product 🍨" data-es="⭐ ¡Excelente elección! Puedes agregar otro producto">⭐ Excellent choice! You can add another product</span>` : `<span data-en="⭐ Excellent choice! You can add another product" data-es="⭐ ¡Excelente elección! Puedes agregar otro producto">⭐ ¡Excelente elección! Puedes agregar otro producto</span>` : i.innerHTML = _ === `EN` ? `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te esperan">🌟 Excelent! Our team of experts is waiting for you</span>` : `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te espera">🌟 ¡Excelente! Nuestro equipo de expertos te espera</span>`;
+        i.innerHTML = _ === `EN` ? `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Add <strong>$${e} more</strong> for special discounts 🎉</span>` : `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉</span>`
+      } else n < 20 ? i.innerHTML = _ === `EN` ? `<span data-en="⭐ Excellent choice! You can add another product 💻" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ Excellent choice! You can add another product</span>` : `<span data-en="⭐ Excellent choice! You can add another product" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ ¡Excelente elección! Puedes agregar otro programa</span>` : i.innerHTML = _ === `EN` ? `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te esperan">🌟 Excelent! Our team of experts is waiting for you</span>` : `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te espera">🌟 ¡Excelente! Nuestro equipo de expertos te espera</span>`;
       I.appendChild(i)
     }
   }
@@ -385,26 +365,28 @@ function V() {
       <span data-en="${t > 0 ? `Order now · $${e.toFixed(2)}` : `Order via WhatsApp`}" data-es="${t > 0 ? `Pedir ahora · $${e.toFixed(2)}` : `Pedir vía WhatsApp`}">${t > 0 ? `${n} · $${e.toFixed(2)}` : r}</span>`, z.disabled = t === 0
   } A()
 }
+
 function H(e) {
   k[e] || (k[e] = 0), k[e]++, b(`add_to_cart`, { id: e }), V(), D[e] && T[e] && E(e), L && (L.classList.add(`cart-pop`), setTimeout(() => L.classList.remove(`cart-pop`), 400)), N && (N.classList.add(`cart-pop`), setTimeout(() => N.classList.remove(`cart-pop`), 400))
 }
+
 function U() {
   P && P.classList.add(`open`), F && F.classList.add(`show`)
 }
+
 document.querySelectorAll(`.catalog-product-card`).forEach(e => {
-  // ACA FUE CORREGIDO EL ID DE WINDOWS 11 Y AGREGADO EL PRODUCTO DE YOGURT
   let t = {
     "Windows-11.Professional": [{ name: `Windows 11 Profesional`, price: 12 }],
     "Windows-10-Professional": [{ name: `Windows 10 Professional`, price: 12 }],
-    "cat-tetas": [{ name: `🍦 Tetas de Yogurt`, price: 1 }]
+    "office-2021": [{ name: `Microsoft Office 2021`, price: 15 }]
   }[e.id];
-  
+
   if (!t) return;
-  
+
   let n = e.querySelector(`.catalog-product-info`),
     r = document.createElement(`div`);
   r.className = `qty-counters-wrapper`, t.forEach(({ name: e, price: n }) => {
-    let i = t.length > 1 ? e.replace(/Kéfir de Leche |Yogurt Griego |Yogurt Líquido |Helado /, ``) : ``,
+    let i = ``, // Ya no es necesario limpiar nombres de helados o yogures
       a = document.createElement(`div`);
     a.className = `qty-counter-row`, a.dataset.productName = e, a.innerHTML = `
       <div class="qty-counter-label">
@@ -436,27 +418,31 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
 }), z && z.addEventListener(`click`, () => {
   Object.keys(k).length !== 0 && J()
 });
+
 var W = document.getElementById(`checkout-modal-overlay`),
   G = document.getElementById(`close-checkout`),
   K = document.getElementById(`checkout-form`);
 document.getElementById(`checkout-content-wrapper`);
 var q = document.getElementById(`checkout-summary-view`);
+
 function J() {
   b(`checkout_started`), K && (K.style.display = `flex`), q && (q.style.display = `none`), W.classList.add(`visible`), document.body.style.overflow = `hidden`
 }
 function Y() {
   W.classList.remove(`visible`), document.body.style.overflow = ``
 }
+
 G && G.addEventListener(`click`, Y), window.addEventListener(`click`, e => {
   e.target === W && Y()
 });
+
 function X(e) {
   let t = Object.entries(k);
   if (t.length === 0) return;
   let n = B().toFixed(2),
     r = { details: _ === `EN` ? `Customer Details` : `Detalles del Cliente`, order: _ === `EN` ? `Order Summary` : `Resumen del Pedido`, total: _ === `EN` ? `Estimated Total` : `Total Estimados`, edit: _ === `EN` ? `Edit Details` : `Editar Detalles`, confirm: _ === `EN` ? `Confirm and Send` : `Confirmar y Enviar` },
     i = t.map(([e, t]) => {
-      let n = D[e] || { price: 0, emoji: `🍦` },
+      let n = D[e] || { price: 0, emoji: `💻` },
         r = (n.price * t).toFixed(2);
       return `<div class="summary-item">
           <span>${n.emoji} ${t}x ${e}</span>
@@ -469,7 +455,7 @@ function X(e) {
     <h3>${r.details}</h3>
     <div class="summary-details">
       <div><strong>Nombre:</strong> ${e.name}</div>
-      <div><strong>Dirección:</strong> ${e.address}</div>
+      <div><strong>Correo:</strong> ${e.address}</div>
       <div><strong>Teléfono:</strong> ${e.phone}</div>
     </div>
   </div>
@@ -499,20 +485,22 @@ function X(e) {
     Z(e)
   }
 }
+
 function Z(e) {
   b(`order_confirmed`);
   let t = Object.entries(k);
   if (t.length === 0) return;
   let n = B().toFixed(2),
     r = `Hola equipo de Compurobotik C.A.\n\n`;
-  r += `*DETALLES DEL PEDIDO* 📝\n`, r += `👤 *Nombre:* ${e.name}\n`, r += `📍 *Dirección:* ${e.address}\n`, r += `📞 *Teléfono:* ${e.phone}\n\n`, r += `*PRODUCTOS:*\n`, t.forEach(([e, t]) => {
+  r += `*DETALLES DEL PEDIDO* 📝\n`, r += `👤 *Nombre:* ${e.name}\n`, r += `✉️ *Correo:* ${e.address}\n`, r += `📞 *Teléfono:* ${e.phone}\n\n`, r += `*PRODUCTOS:*\n`, t.forEach(([e, t]) => {
     let n = D[e],
       i = n ? (n.price * t).toFixed(2) : `?`;
-    r += `${n ? n.emoji : `🍦`} ${t}x ${e} - $${i}\n`
+    r += `${n ? n.emoji : `💻`} ${t}x ${e} - $${i}\n`
   }), r += `\n💰 *Total: $${n}*\n\n¡Gracias!`;
   let i = `https://wa.me/584248930224?text=${encodeURIComponent(r)}`;
   window.open(i, `_blank`), Y()
 }
+
 K && K.addEventListener(`submit`, e => {
   e.preventDefault();
   let t = { name: document.getElementById(`cust-name`).value, address: document.getElementById(`cust-address`).value, phone: document.getElementById(`cust-phone`).value };
@@ -552,13 +540,13 @@ K && K.addEventListener(`submit`, e => {
     }
   let i = () => {
     confetti({ particleCount: 100, spread: 70, origin: { y: .6 }, colors: [`#E67E22`, `#F1C40F`, `#FFFFFF`, `#FFD700`], disableForReducedMotion: !0 }), Swal.fire({
-      title: `¡Es momento de disfrutar! ✨`, html: `
+      title: `¡Es momento de optimizar tu equipo! 🚀`, html: `
         <div style="font-size: 1.1rem; color: #000;">
-            Estás a un paso de probar la felicidad. 🍓<br>
-            <b>Frutas frescas, yogurt real y mucho amor.</b><br>
-            ¡Prepárate para tu nuevo vicio saludable!
+            Estás a un paso de tener tu PC al 100%. 💻<br>
+            <b>Licencias originales, soporte remoto y garantía total.</b><br>
+            ¡Trabaja y juega sin interrupciones!
         </div>
-    `, confirmButtonText: `¡Ver el Menú! 🍨`, confirmButtonColor: `#E67E22`, backdrop: `rgba(230, 126, 34, 0.1)`, showClass: { popup: `animate__animated animate__zoomIn` }
+    `, confirmButtonText: `¡Ver Catálogo! 💻`, confirmButtonColor: `#E67E22`, backdrop: `rgba(230, 126, 34, 0.1)`, showClass: { popup: `animate__animated animate__zoomIn` }
     }).then(e => {
       if (e.isConfirmed) {
         let e = document.getElementById(`productos`);
