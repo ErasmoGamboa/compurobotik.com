@@ -1,24 +1,3 @@
-(function () {
-  let e = document.createElement(`link`).relList;
-  if (e && e.supports && e.supports(`modulepreload`)) return;
-  for (let e of document.querySelectorAll(`link[rel="modulepreload"]`)) n(e);
-  new MutationObserver(e => {
-    for (let t of e)
-      if (t.type === `childList`)
-        for (let e of t.addedNodes) e.tagName === `LINK` && e.rel === `modulepreload` && n(e)
-  }).observe(document, { childList: !0, subtree: !0 });
-  function t(e) {
-    let t = {};
-    return e.integrity && (t.integrity = e.integrity), e.referrerPolicy && (t.referrerPolicy = e.referrerPolicy), e.crossOrigin === `use-credentials` ? t.credentials = `include` : e.crossOrigin === `anonymous` ? t.credentials = `omit` : t.credentials = `same-origin`, t
-  }
-  function n(e) {
-    if (e.ep) return;
-    e.ep = !0;
-    let n = t(e);
-    fetch(e.href, n)
-  }
-})();
-
 var e = document.getElementById(`navbar`),
   t = document.getElementById(`hamburger`),
   n = document.getElementById(`nav-links`);
@@ -67,42 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-var c = () => {
-  let e = Object.keys(D),
-    t = e[Math.floor(Math.random() * e.length)],
-    n = [`Caracas`, `Valencia`, `Maracay`, `Barquisimeto`, `Margarita`],
-    r = n[Math.floor(Math.random() * n.length)],
-    i = document.querySelector(`.sales-toast`);
-  i && i.remove();
-  let a = document.createElement(`div`);
-  a.className = `sales-toast`, a.innerHTML = `🔥 ¡Alguien en <strong>${r}</strong> acaba de pedir <strong>${t}</strong>! 💻`, document.body.appendChild(a), requestAnimationFrame(() => {
-    requestAnimationFrame(() => a.classList.add(`show`))
-  }), setTimeout(() => {
-    a.classList.remove(`show`), setTimeout(() => a.remove(), 400)
-  }, 4e3)
-};
-
-setInterval(c, Math.random() * 24e4 + 48e4);
-
-var l = !1;
-window.addEventListener(`scroll`, () => {
-  l ||= (window.requestAnimationFrame(() => {
-    e && (window.scrollY > 40 ? e.classList.add(`scrolled`) : e.classList.remove(`scrolled`)), l = !1
-  }), !0)
-}, { passive: !0 }), t && t.addEventListener(`click`, () => {
-  if (n && e) {
-    let r = n.classList.toggle(`open`);
-    t.classList.toggle(`active`, r), t.setAttribute(`aria-expanded`, r), e.classList.toggle(`menu-open`, r), document.body.style.overflow = r ? `hidden` : ``
-  }
-}), n && n.querySelectorAll(`a`).forEach(r => {
-  r.addEventListener(`click`, () => {
-    n.classList.remove(`open`), t && (t.classList.remove(`active`), t.setAttribute(`aria-expanded`, `false`)), e && e.classList.remove(`menu-open`), document.body.style.overflow = ``
-  })
-});
-
+// Diccionario unificado exactamente con los nombres de las tarjetas
 var D = {
   "Windows 11 Profesional": { price: 12, emoji: `💻` },
-  "Windows 10 Professional": { price: 12, emoji: `💻` },
+  "Windows 10 Profesional": { price: 12, emoji: `💻` },
   "Microsoft Office 2021": { price: 15, emoji: `💿` }
 },
   O = localStorage.getItem(`shilis_cart`),
@@ -188,7 +135,7 @@ function V() {
 }
 
 function H(e) {
-  k[e] || (k[e] = 0), k[e]++, V(), L && (L.classList.add(`cart-pop`), setTimeout(() => L.classList.remove(`cart-pop`), 400))
+  k[e] || (k[e] = 0), k[e]++, V();
 }
 
 function U() {
@@ -198,7 +145,7 @@ function U() {
 document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let t = {
     "Windows-11.Professional": [{ name: `Windows 11 Profesional`, price: 12 }],
-    "Windows-10-Professional": [{ name: `Windows 10 Professional`, price: 12 }],
+    "Windows-10-Professional": [{ name: `Windows 10 Profesional`, price: 12 }],
     "office-2021": [{ name: `Microsoft Office 2021`, price: 15 }]
   }[e.id];
 
@@ -228,7 +175,7 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
       c.textContent = t, t === 0 ? c.classList.add(`qc-zero`) : c.classList.remove(`qc-zero`)
     }), r.appendChild(a)
   }), n && n.appendChild(r)
-}), [L, N].forEach(e => {
+}), [N].forEach(e => {
   e && e.addEventListener(`click`, () => U())
 }), [R, F].forEach(e => {
   e && e.addEventListener(`click`, () => {
