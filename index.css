@@ -3787,3 +3787,10 @@ body.dark-mode .flavor-price {
         transform: none;
     }
 }
+
+/* --- CORRECCIÓN MAPA RESPONSIVE --- */
+.map-container iframe {
+    width: 100% !important;
+    max-width: 100%;
+    height: 300px; /* Altura optimizada para móviles */
+}
