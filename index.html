@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<!-- Mirrored from shilis.vercel.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Jul 2026 12:44:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Compurobotik C.A. – Venta de Software en Venezuela" />
+  <title>Compurobotik C.A. &amp; Venta de Software</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Poppins:wght@400;500;600;700&amp;family=Nunito:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link rel="manifest" href="assets/manifest-nruwoG0P.json" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" crossorigin src="assets/index-CqRtwg5o.js"></script>
+  <link rel="stylesheet" crossorigin href="assets/index-EneWCtCR.css">
+</head>
+
+<body>
+  <!-- ============ SPLASH SCREEN ============ -->
+  <div class="splash-screen" id="splash-screen">
+    <img src="assets/logo-Cgg86Zw7.jpg" alt="Shili's Cream" class="splash-logo"
+      style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+    <h2>Shili's Cream</h2>
+  </div>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+
+        <li><a href="#inicio" data-en="Home" data-es="Inicio">Inicio</a></li>
+        <li><a href="#productos" data-en="Products" data-es="Productos">Productos</a></li>
+        <li><a href="#servicios" data-en="Services" data-es="Servicios">Servicios</a></li>
+        <li><a href="#horario" data-en="Schedule" data-es="Horario">Horario</a></li>
+        <li><a href="#faq" data-en="FAQ" data-es="Preguntas">Preguntas</a></li>
+        <li class="nav-extra-toggles">
+          <button id="lang-toggle" class="lang-toggle-btn" aria-label="Cambiar Idioma">
+            <span class="flag-icon">🇻🇪</span>
+            <span class="lang-text">ES</span>
+          </button>
+          <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor"
+              style="width:22px;height:22px;color:#F59E0B;">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="nav-cart-btn" id="nav-cart-btn" aria-label="Ver carrito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="nav-cart-badge" id="nav-cart-badge" style="display:none">0</span>
+          </button>
+        </li>
+        <li>
+          <a href="#productos" class="nav-cta" id="nav-whatsapp-btn" data-en="Build My Order" data-es="Armar mi Pedido">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="wa-icon">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Pedir Ahora
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <main id="main-content">
+    <section class="hero" id="inicio">
+      <div class="hero-bg-text">Compurobotik C.A.</div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-tag" data-en="🍦 Sierra Parima Branch" data-es="🍦 Sierra Parima">🍦 Sierra Parima</span>
+          <h1 class="hero-title"
+            data-en="Sale of<br /> <span class='hero-highlight'>Software Licenses</span><br /> in Venezuela"
+            data-es="Venta de<br /><span class='hero-highlight'>Licencias de Programas</span><br />en toda Venezuela">
+            El Mejor<br />
+            <span class="hero-highlight">Yogurt Parfait</span><br />
+            de la Ciudad
+          </h1>
+          <p class="hero-subtitle"
+            data-en="Perfect layers of creamy yogurt, fresh fruits, and crunchy granola. A different pleasure in every scoop."
+            data-es="Capas perfectas de yogurt cremoso, frutas frescas y granola crujiente. Un placer diferente en cada porción.">
+            Capas perfectas de yogurt cremoso, frutas frescas y granola crujiente. Un placer
+            diferente en cada porción.</p>
+          <div class="hero-actions">
+            <button type="button" class="btn-primary" id="hero-order-btn" data-en="Order Now" data-es="Hacer Pedido">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="wa-icon">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Hacer Pedido
+            </button>
+            <a href="#productos" class="btn-secondary" id="hero-menu-btn" data-en="See Product Catalog" data-es="Ver Catálogo de Productos">Ver
+              Menú</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-num">700+</span>
+              <span class="stat-label" data-en="Followers" data-es="Seguidores">Seguidores</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-num">100%</span>
+              <span class="stat-label" data-en="Responsible" data-es="Responsable">Responsable</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+              <span class="stat-num">5</span>
+              <span class="stat-label" data-en="Sizes" data-es="Tamaños">Tamaños</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image-wrap">
+          <div class="hero-glow"></div>
+          <img src="assets/Shilis_parfait_crop-DlNVWZE6.jpg" alt="Yogurt Parfait de Shili's con frutas frescas y granola"
+            class="hero-img" />
+          <div class="hero-badge" data-en="⭐ Neighborhood Favorite" data-es="⭐ Favorito del público">
+            <span class="badge-emoji">⭐</span>
+            <span>Favorito del público</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span data-en="Discover More" data-es="Descubre más">Descubre más</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ============ CATÁLOGO DE PRODUCTOS ============ -->
+    <section class="catalog-section" id="productos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-en="Our Catalog" data-es="Nuestro Catálogo">Nuestro Catálogo</span>
+          <h2 data-en="Made with <span class='accent'>Love and Freshness</span>"
+            data-es="Hecho con <span class='accent'>Amor y Frescura</span>">Hecho con <span class="accent">Amor y
+              Frescura</span></h2>
+          <p data-en="¡Select your digital product here!"
+            data-es="¡Selecciona tu producto digital aquí!">¡Selecciona tus favoritos y arma tu pedido
+            aquí! 🍨</p>
+        </div>
+
+        <div class="catalog-unified-grid">
+
+          <!-- ===== PARFAITS ===== -->
+          <div class="catalog-product-card" id="Windows-11.Professional">
+            <div class="catalog-product-img-wrap">
+              <img src="assets/Windows 11 Professional.webp" alt="Microsoft Windows 11 Professional Digital License" loading="lazy">
+            </div>
+            <div class="catalog-product-info">
+              <h3 data-en="Microsoft Windows 11 Professional- Digital License" data-es="Windows 11 Profesional - Licencia Digital"> Microsoft Windows 11 Professional Digital License
+              </h3>
+              <p data-en="This license allows you to activate Windows 11 Professional on your PC. Buy now and we will instantly send your Windows 11 Professional product key to your email. This is a one-time license and the activation key is only valid for installation on 1 PC."
+                data-es="Esta licencia te permite activar Windows 11 Professional en tu PC. Compra ahora y te enviaremos al instante la clave de producto de Windows 11 Professional a tu correo electrónico. Esta es una licencia de (1) solo uso y la clave de activación solo es válida para la instalación en (1) PC.">
+                Esta licencia te permite activar Windows 11 Professional en tu PC. Compra ahora y te enviaremos al instante la clave de producto de Windows 11 Professional a tu correo electrónico. Esta es una licencia de (1) solo uso y la clave de activación solo es válida para la instalación en (1) PC.</p>
+              <div class="catalog-prices">
+                <span class="catalog-price-badge"><span class="catalog-price-label">1 PC</span>
+                  <strong>$12</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="catalog-product-card" id="Windows-10-Professional">
+            <div class="catalog-product-img-wrap">
+              <img src="assets/Windows 10 Professional.webp" alt="Windows 10 Professional.webp" loading="lazy">
+            </div>
+            <div class="catalog-product-info">
+              <h3 data-en="Microsoft Windows 10 Professional - Digital License" data-es="Windows 10 Profesional - Licencia Digital">Windows 10 Profesional - Licencia Digital</h3>
+              <p data-en="This license allows you to activate Windows 10 Professional on your PC. Buy now and we will instantly send your Windows 11 Professional product key to your email. This is a one-time license and the activation key is only valid for installation on 1 PC."
+                data-es="Esta licencia te permite activar Windows 10 Professional en tu PC. Compra ahora y te enviaremos al instante la clave de producto de Windows 11 Professional a tu correo electrónico. Esta es una licencia de (1) solo uso y la clave de activación solo es válida para la instalación en (1) PC.">
+                Esta licencia te permite activar Windows 10 Professional en tu PC. Compra ahora y te enviaremos al instante la clave de producto de Windows 11 Professional a tu correo electrónico. Esta es una licencia de (1) solo uso y la clave de activación solo es válida para la instalación en (1) PC.</p>
+              <div class="catalog-prices">
+                <span class="catalog-price-badge"><span class="catalog-price-label">1 PC</span>
+                  <strong>$12</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== TETAS DE YOGURT ===== -->
+          <div class="catalog-product-card" id="cat-tetas">
+            <div class="catalog-product-img-wrap">
+              <img src="assets/Shilis_Tetas_yogurt-BDTfpNnd.jpg" alt="Tetas de Yogurt" loading="lazy">
+            </div>
+            <div class="catalog-product-info">
+              <h3 data-en="🍦 Yogurt Popsicles" data-es="🍦 Tetas de Yogurt">🍦 Tetas de Yogurt</h3>
+              <p data-en="The most affordable and fun snack. Frozen yogurt with: Strawberry 🍓, Blackberry 🫐, Pineapple 🍍, Passion fruit 🟡 ."
+                data-es="El snack más económico y divertido. Yogurt congelado con: 🍓Fresa, 🫐Mora, 🍍Piña, 🟡Parchita.">
+                El snack más económico y divertido. Yogurt congelado con: 🍓Fresa, 🫐Mora, 🍍Piña, 🟡Parchita.".</p>
+
+              <div class="catalog-prices">
+                <span class="catalog-price-badge"><strong>$1.00</strong> <span
+                    class="catalog-price-label">c/u</span></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="services-section" id="servicios">
+      <div class="services-bg"></div>
+      <div class="container">
+        <div class="section-header light">
+          <span class="section-tag" data-en="How to order?" data-es="¿Cómo Pedimos?">¿Cómo Pedimos?</span>
+          <h2 data-en="Pick Up & <span class='accent-light'>Delivery 🔥</span>"
+            data-es="Pick Up & <span class='accent-light'>Delivery 🔥</span>">Pick Up &amp; <span
+              class="accent-light">Delivery 🔥</span></h2>
+          <p data-en="We take your favorite yogurt to wherever you are."
+            data-es="Llevamos tu yogurt favorito hasta donde estés, o pasa a buscarlo listo y fresquito.">Llevamos tu
+            yogurt favorito hasta donde estés, o pasa a buscarlo listo y fresquito.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" id="servicio-pickup">
+            <div class="service-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="service-icon">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+            <h3 data-en="Pick Up" data-es="Pick Up">Pick Up</h3>
+            <p data-en="Place your order on WhatsApp and pick it up at our store in Sierra Parima."
+              data-es="Haz tu pedido por WhatsApp y pasa a retirar tu yogurt en nuestra tienda en Sierra Parima. Rápido, fresco y listo para llevar.">
+              Haz tu pedido por WhatsApp y pasa a retirar tu yogurt en nuestra tienda en Sierra Parima. Rápido, fresco y
+              listo para llevar.</p>
+            <ul class="service-list">
+              <li data-en="✅ No extra cost" data-es="✅ Sin costo adicional">✅ Sin costo adicional</li>
+              <li data-en="✅ Ready in minutes" data-es="✅ Listo en minutos">✅ Listo en minutos</li>
+              <li data-en="✅ Sierra Parima" data-es="✅ Sierra Parima">✅ Sierra Parima</li>
+            </ul>
+            <a href="https://wa.me/584249101240?text=Hola!%20Quiero%20hacer%20un%20pedido%20para%20Pick%20Up%20%f0%9f%8d%a6"
+              target="_blank" rel="noopener" class="service-btn" id="btn-pickup" data-en="Order for Pick Up"
+              data-es="Pedir para Pick Up">Pedir para Pick Up</a>
+          </div>
+
+          <div class="service-card delivery-card" id="servicio-delivery">
+            <div class="service-icon-wrap delivery-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="service-icon">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+              </svg>
+            </div>
+            <h3 data-en="Delivery" data-es="Delivery">Delivery</h3>
+            <p data-en="Fast delivery to your doorstep."
+              data-es="¿No puedes salir? ¡No hay problema! Te llevamos tu pedido a domicilio para que disfrutes desde la comodidad de tu hogar.">
+              ¿No puedes salir? ¡No hay problema! Te llevamos tu pedido a domicilio para que disfrutes desde la
+              comodidad
+              de tu hogar.</p>
+            <ul class="service-list">
+              <li data-en="🔥 Fast delivery" data-es="🔥 Entrega rápida">🔥 Entrega rápida</li>
+              <li data-en="🔥 Sierra Parima zone" data-es="🔥 Zona Sierra Parima">🔥 Zona Sierra Parima</li>
+              <li data-en="🔥 Order by WhatsApp" data-es="🔥 Pídelo por WhatsApp">🔥 Pídelo por WhatsApp</li>
+            </ul>
+            <a href="https://wa.me/584249101240?text=Hola!%20Quiero%20pedir%20un%20Delivery%20de%20Shili's%20%f0%9f%8d%a6%20Mi%20direcci%c3%b3n%20es:"
+              target="_blank" rel="noopener" class="service-btn delivery-btn" id="btn-delivery" data-en="Order Delivery"
+              data-es="Pedir Delivery">Pedir Delivery</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-en="Frequently Asked Questions" data-es="Preguntas Frecuentes">Preguntas
+            Frecuentes</span>
+          <h2 data-en="Everything you <span class='accent'>Need to Know</span>"
+            data-es="Todo lo que <span class='accent'>Necesitas Saber</span>">Todo lo que <span class="accent">Necesitas
+              Saber</span></h2>
+        </div>
+        <div class="faq-grid">
+          <details class="faq-item">
+            <summary data-en="What are the payment methods?" data-es="¿Cuáles son los métodos de pago?">¿Cuáles son los
+              métodos de pago?</summary>
+            <p data-en="We accept mobile payment, bank transfers to Bank of Venezuela, Zelle and USDT (Binance)"
+              data-es="Aceptamos pago móvil, transferencia bancaria al Banco de Venezuela y USDT (Binance)">
+              Aceptamos pago móvil, transferencias bancarias, Zelle y efectivo (divisas) en nuestra sede.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-en="Do you have lactose-free options?" data-es="¿Tienen opciones sin lactosa?">¿Tienen
+              opciones sin lactosa?</summary>
+            <p data-en="Currently we work with traditional creamy yogurt bases. Ask on WhatsApp for lactose-free availability depending on the season."
+              data-es="Actualmente trabajamos con bases de yogurt tradicional cremoso. Pregunta al WhatsApp para disponibilidad de versiones sin lactosa según la temporada.">
+              Actualmente trabajamos con bases de yogurt tradicional cremoso. Pregunta al WhatsApp para disponibilidad
+              de
+              versiones sin lactosa según la temporada.</p>
+          </details>
+          <details class="faq-item">
+            <summary data-en="How far does delivery reach?" data-es="¿Hasta dónde llega el delivery?">¿Hasta dónde llega
+              el delivery?</summary>
+            <p data-en="We reach a large part of the city. Contact us via WhatsApp with your exact address and we will confirm the cost for your area immediately."
+              data-es="Llegamos a gran parte de la ciudad. Contáctanos por WhatsApp indicando tu dirección exacta y te confirmaremos el costo de la zona de inmediato.">
+              Llegamos a gran parte de la ciudad. Contáctanos por WhatsApp indicando tu dirección exacta y te
+              confirmaremos el costo de la zona de inmediato.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HORARIO ============ -->
+    <section class="schedule-section" id="horario">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-en="Opening Hours" data-es="Horario de Atención">Horario de Atención</span>
+          <h2 data-en="We are Here for <span class='accent'>You</span>"
+            data-es="Estamos Aquí para <span class='accent'>Ti</span>">Estamos Aquí para <span class="accent">Ti</span>
+          </h2>
+        </div>
+        <div class="schedule-grid">
+          <div class="schedule-card" id="horario-semana">
+            <div class="schedule-icon">🕐</div>
+            <h3 data-en="Monday to Saturday" data-es="Lunes a Sabado">Lunes a Sabado</h3>
+            <div class="schedule-time">
+              <span class="time-from">8:00 AM</span>
+              <span class="time-separator">—</span>
+              <span class="time-to">4:00 PM</span>
+            </div>
+            <p data-en="Open every day to sweeten your day!" data-es="¡Abiertos todos los días para endulzarte el día!">
+              ¡Abiertos todos los días para endulzarte el día!</p>
+          </div>
+          <div class="schedule-card location-card" id="horario-ubicacion">
+            <div class="schedule-icon">📍</div>
+            <h3 data-en="Location" data-es="Ubicación">Ubicación</h3>
+            <p class="location-name">Sierra Parima</p>
+            <div class="map-container" style="margin: 16px 0; border-radius: 12px; overflow: hidden;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15750.60205831518!2d-62.748366!3d8.286997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dcbff0000000001%3A0xc00c0b000000000!2sPuerto%20Ordaz!5e0!3m2!1ses!2sve!4v1700000000000"
+                width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" title="Mapa con la ubicación de Shili's Cream"></iframe>
+            </div>
+            <p data-en="Find us and follow us on Instagram <strong>@shilis_cream</strong> for news and special promotions."
+              data-es="Encuéntranos y síguenos en Instagram <strong>@shilis_cream</strong> para novedades y promociones especiales.">
+              Encuéntranos y síguenos en Instagram <strong>@shilis_cream</strong> para novedades y promociones
+              especiales.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIOS ============ -->
+    <section class="testimonials-section" id="testimonios">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-en="Client Reviews" data-es="Reseñas de Clientes">Reseñas de Clientes</span>
+          <h2 data-en="What Our <span class='accent'>Customers Say</span>"
+            data-es="Lo que Dicen Nuestros <span class='accent'>Clientes</span>">Lo que Dicen Nuestros <span
+              class="accent">Clientes</span></h2>
+          <p data-en="Real experiences from yogurt lovers in Sierra Parima."
+            data-es="Experiencias reales de amantes del yogurt en Sierra Parima.">Experiencias reales de amantes del
+            yogurt en Sierra Parima.</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text"
+              data-en="The Parfaits are incredible! The freshest fruits and the creamiest yogurt in town."
+              data-es="¡Los Parfaits son increíbles! Las frutas más frescas y el yogurt más cremoso de la ciudad.">¡Los
+              Parfaits son increíbles! Las frutas más frescas y el yogurt más cremoso de la ciudad.</p>
+            <div class="testimonial-author">
+              <strong data-en="Maria G." data-es="Maria G.">Maria G.</strong>
+              <span data-en="Verified Customer" data-es="Cliente Verificado">Cliente Verificado</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text"
+              data-en="Best delivery service. They arrive fast and the product is always cold and delicious."
+              data-es="El mejor servicio de delivery. Llegan rápido y el producto siempre llega frío y delicioso.">El
+              mejor servicio de delivery. Llegan rápido y el producto siempre llega frío y delicioso.</p>
+            <div class="testimonial-author">
+              <strong data-en="Carlos R." data-es="Carlos R.">Carlos R.</strong>
+              <span data-en="Verified Customer" data-es="Cliente Verificado">Cliente Verificado</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text"
+              data-en="I love the Greek Yogurt Bowl for breakfast. Healthy, natural, and simply delicious."
+              data-es="Amo el Bowl de Yogurt Griego para el desayuno. Saludable, natural y simplemente delicioso.">Amo
+              el Bowl de Yogurt Griego para el desayuno. Saludable, natural y simplemente delicioso.</p>
+            <div class="testimonial-author">
+              <strong data-en="Ana M." data-es="Ana M.">Ana M.</strong>
+              <span data-en="Verified Customer" data-es="Cliente Verificado">Cliente Verificado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHATSAPP CTA ============ -->
+    <section class="whatsapp-section" id="contacto">
+      <div class="container">
+        <div class="wa-cta-card">
+          <div class="wa-cta-content">
+            <div class="wa-cta-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </div>
+            <div class="wa-cta-text">
+              <h2 data-en="Ready to Order? 🍦" data-es="¿Listo para Pedir? 🍦">¿Listo para Pedir? 🍦</h2>
+              <p data-en="Write to us directly on WhatsApp. We attend from Monday to Saturday from<strong> 8:00 AM to 4:00 PM</strong>. Immediate response!"
+                data-es="Escríbenos directamente por WhatsApp. Atendemos de Lunes a Sabado de<strong> 8:00 AM a 4:00 PM</strong>. ¡Respuesta inmediata!">
+                Escríbenos directamente por WhatsApp. Atendemos de Lunes a Sabado de<strong> 8:00 AM a 4:00 PM</strong>.
+                ¡Respuesta inmediata!</p>
+              <div class="wa-number"><a href="tel:+584248930224" style="color: inherit; text-decoration: none;">📱 0424-8930224</a></div>
+            </div>
+          </div>
+          <div class="wa-cta-buttons">
+            <a href="https://wa.me/584249101240?text=Hola, estoy interesado en comprar una licencia digital"
+              target="_blank" rel="noopener" class="wa-btn-main" id="cta-whatsapp-main" data-en="Chat on WhatsApp"
+              data-es="Chatear en WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="wa-icon">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Chatear en WhatsApp
+            </a>
+            <a href="https://www.instagram.com/compurobotik" target="_blank" rel="noopener" class="wa-btn-secondary"
+              id="cta-instagram" data-en="Follow on Instagram" data-es="Seguir en Instagram">Seguir en Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/logo-Cgg86Zw7.jpg" alt="Shili's Logo" class="footer-logo" />
+          <p data-en="The best yogurt for yogurt lovers. Creamy, natural, and full of love."
+            data-es="El mejor yogurt para los amantes del yogurt. Cremoso, natural y lleno de amor.">El mejor yogurt
+            para los amantes del yogurt. Cremoso, natural y lleno de amor.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/compurobotik" target="_blank" rel="noopener" aria-label="Instagram"
+              id="footer-instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                </path>
+              </svg>
+            </a>
+            <a href="https://wa.me/584248930224" target="_blank" rel="noopener" aria-label="WhatsApp"
+              id="footer-whatsapp">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3 data-en="Navigation" data-es="Navegación">Navegación</h3>
+          <ul>
+            <li><a href="#inicio" data-en="Home" data-es="Inicio">Inicio</a></li>
+            <li><a href="#productos" data-en="Products" data-es="Productos">Productos</a></li>
+            <li><a href="#servicios" data-en="Services" data-es="Servicios">Servicios</a></li>
+            <li><a href="#horario" data-en="Schedule" data-es="Horario">Horario</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3 data-en="Contact" data-es="Contacto">Contacto</h3>
+          <ul>
+            <li>📍 Carúpano, Venezuela</li>
+            <li>🕐 8:00 AM – 4:00 PM</li>
+            <li><a href="tel:+584248930224" style="color: inherit; text-decoration: none;">📱 0424-8930224</a></li>
+            <li>📸 @compurobotik</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-en="&copy; 2026 Compurobotik C.A. &amp; All rights reserved."
+          data-es="&copy; 2026 Compurobotik C.A.&amp; Todos los derechos reservados.">&copy;
+          2026 Compurobotik C.A. &amp; Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING WHATSAPP ============ -->
+  <a href="https://wa.me/584248930224?text=Hola%Compurobotik%20Quisiera%20hacer%20un%20pedido%20%f0%9f%8d%a6" target="_blank"
+    rel="noopener" class="floating-whatsapp" id="floating-wa" aria-label="Chat by WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+
+
+  <!-- ============ PROMO POPUP ============ -->
+  <div class="promo-overlay" id="promo-overlay">
+    <div class="promo-modal">
+      <button class="close-promo" id="close-promo">&times;</button>
+      <div class="promo-content">
+        <h2>🎁 ¡Oferta del Día!</h2>
+        <p>¡Solo por hoy: <strong>Topping gratis</strong> pidiendo cualquiera de nuestras Bases Tamaño Grande!</p>
+        <a href="https://wa.me/584248930224?text=Hola!%20Quiero%20aprovechar%20la%20promoci%c3%b3n%20del%20topping%20gratis%20%f0%9f%8e%81"
+          target="_blank" rel="noopener" class="btn-primary promo-btn" id="promo-cta">
+          Reclamar Promoción
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CART SIDEBAR ============ -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2 data-en="🛒 Your Order" data-es="🛒 Tu Pedido">🛒 Tu Pedido</h2>
+      <button class="close-cart" id="close-cart" aria-label="Cerrar carrito">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="empty-cart" id="empty-cart">Tu carrito está vacío.</div>
+    </div>
+    <div class="cart-footer">
+      <button class="wa-btn-main checkout-btn" id="checkout-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        <span data-en="Order via WhatsApp" data-es="Pedir vía WhatsApp">Pedir vía WhatsApp</span>
+      </button>
+      <p class="cart-footer-hint" data-en="🔒 Secure order · Pay on delivery · Pick Up &amp; Delivery"
+        data-es="🔒 Pedido seguro · Pago al recibir · Pick Up &amp; Delivery">🔒 Pedido seguro · Pago al recibir · Pick
+        Up &amp; Delivery</p>
+    </div>
+  </div>
+
+  <!-- ============ PRODUCT DETAIL MODAL ============ -->
+  <div class="product-modal-overlay" id="product-modal-overlay">
+    <div class="product-modal">
+      <button class="close-modal" id="close-modal">&times;</button>
+      <div class="modal-grid">
+        <div class="modal-gallery">
+          <img src="#" alt="Product image" id="modal-img">
+        </div>
+        <div class="modal-info">
+          <span class="modal-badge" id="modal-badge"></span>
+          <h2 id="modal-title"></h2>
+          <div class="modal-rating" id="modal-rating"></div>
+          <p class="modal-price" id="modal-price"></p>
+          <p class="modal-description" id="modal-description"></p>
+          <div class="modal-benefits" id="modal-benefits"></div>
+          <button class="btn-primary modal-atc-btn" id="modal-atc-btn">
+            Añadir al Carrito 🛒
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="floating-cart" id="floating-cart" aria-label="Abrir carrito de compras">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:26px;height:26px;">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span id="cart-badge" class="cart-badge">0</span>
+  </button>
+
+  <!-- ============ CHECKOUT MODAL ============ -->
+  <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+    <div class="checkout-modal">
+      <div class="checkout-modal-header">
+        <h2 data-en="Confirm Your Order" data-es="Confirmar Pedido">Confirmar Pedido 🍦</h2>
+        <button class="close-checkout" id="close-checkout">&times;</button>
+      </div>
+      <div id="checkout-content-wrapper">
+        <form id="checkout-form">
+          <div class="checkout-field">
+            <label for="cust-name" data-en="Full Name" data-es="Nombre completo">Nombre completo</label>
+            <input type="text" id="cust-name" required placeholder="Ej. Juan Pérez">
+          </div>
+          <div class="checkout-field">
+            <label for="cust-address" data-en="Delivery Address" data-es="Dirección de Entrega">Dirección de
+              Entrega</label>
+            <input type="text" id="cust-address" required placeholder="Calle, Sector, Punto de referencia">
+          </div>
+          <div class="checkout-field">
+            <label for="cust-phone" data-en="Phone Number" data-es="Número de Teléfono">Número de Teléfono</label>
+            <input type="tel" id="cust-phone" required placeholder="04XX XXXXXXX">
+          </div>
+          <button type="submit" class="btn-primary checkout-submit-btn" id="checkout-submit-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;margin-right:8px;">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            <span data-en="Send Order via WhatsApp" data-es="Enviar Pedido por WhatsApp">Enviar Pedido por
+              WhatsApp</span>
+          </button>
+        </form>
+        <div id="checkout-summary-view" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../cdn.jsdelivr.net/npm/canvas-confetti%401.6.0/dist/confetti.browser.min.js"></script>
+</body>
+
+
+
+<!-- Mirrored from shilis.vercel.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 05 Jul 2026 12:44:54 GMT -->
+</html>
