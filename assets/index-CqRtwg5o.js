@@ -18,15 +18,43 @@
     fetch(e.href, n)
   }
 })();
-
 var e = document.getElementById(`navbar`),
   t = document.getElementById(`hamburger`),
-  n = document.getElementById(`nav-links`);
+  n = document.getElementById(`nav-links`),
+  r = document.querySelectorAll(`.filter-btn`);
+r.length > 0 && r.forEach(e => {
+  e.addEventListener(`click`, () => {
+    r.forEach(e => e.classList.remove(`active`)), e.classList.add(`active`);
+    let t = e.dataset.category;
+    i(t);
+  })
+});
+
+function i(e) {
+  document.querySelectorAll(`.catalog-product-card`).forEach(t => {
+    // Si decides usar categorías en un futuro, se definen aquí
+    t.style.display = `block`;
+    t.classList.remove(`visible`);
+    requestAnimationFrame(() => t.classList.add(`visible`));
+  })
+}
+
+var a = document.getElementById(`product-modal-overlay`),
+  o = document.getElementById(`close-modal`);
+document.getElementById(`modal-img`), document.getElementById(`modal-title`), document.getElementById(`modal-rating`), document.getElementById(`modal-price`), document.getElementById(`modal-description`), document.getElementById(`modal-benefits`), document.getElementById(`modal-badge`), document.getElementById(`modal-atc-btn`);
+
+function s() {
+  a.classList.remove(`visible`)
+}
+
+o && o.addEventListener(`click`, s), window.addEventListener(`click`, e => {
+  e.target === a && s()
+});
 
 function c() {
   let e = Object.keys(D),
     t = e[Math.floor(Math.random() * e.length)],
-    n = [`Caracas`, `Valencia`, `Maracay`, `Barquisimeto`, `Margarita`, `Carúpano`],
+    n = [`Caracas`, `Valencia`, `Maracay`, `Barquisimeto`, `Margarita`],
     r = n[Math.floor(Math.random() * n.length)],
     i = document.querySelector(`.sales-toast`);
   i && i.remove();
@@ -39,7 +67,6 @@ function c() {
 }
 
 setInterval(c, Math.random() * 24e4 + 48e4);
-
 var l = !1;
 window.addEventListener(`scroll`, () => {
   l ||= (window.requestAnimationFrame(() => {
@@ -66,6 +93,14 @@ u && u.addEventListener(`click`, r => {
     let i = e.offsetHeight,
       o = a.getBoundingClientRect().top + window.scrollY - i - 40;
     window.scrollTo({ top: o, behavior: `smooth` }), n && n.classList.remove(`open`), t && (t.classList.remove(`active`), t.setAttribute(`aria-expanded`, `false`)), e && e.classList.remove(`menu-open`), document.body.style.overflow = ``;
+    let s = document.querySelector(`.sales-toast`);
+    s && s.remove();
+    let c = document.createElement(`div`);
+    c.className = `sales-toast`, c.innerHTML = `¡Selecciona tu software y arma tu pedido aquí! 💻`, document.body.appendChild(c), requestAnimationFrame(() => {
+      requestAnimationFrame(() => c.classList.add(`show`))
+    }), setTimeout(() => {
+      c.classList.remove(`show`), setTimeout(() => c.remove(), 400)
+    }, 4e3)
   }
 }), document.addEventListener(`click`, r => {
   e && n && t && !e.contains(r.target) && n.classList.contains(`open`) && (n.classList.remove(`open`), t.classList.remove(`active`), e.classList.remove(`menu-open`), t.setAttribute(`aria-expanded`, `false`), document.body.style.overflow = ``)
@@ -73,6 +108,14 @@ u && u.addEventListener(`click`, r => {
 
 var d = document.getElementById(`hero-order-btn`);
 d && d.addEventListener(`click`, () => {
+  let t = document.querySelector(`.sales-toast`);
+  t && t.remove();
+  let n = document.createElement(`div`);
+  n.className = `sales-toast`, n.innerHTML = `¡Selecciona tus favoritos y arma tu pedido aquí! 💻`, document.body.appendChild(n), requestAnimationFrame(() => {
+    requestAnimationFrame(() => n.classList.add(`show`))
+  }), setTimeout(() => {
+    n.classList.remove(`show`), setTimeout(() => n.remove(), 400)
+  }, 5e3);
   let r = document.querySelector(`#productos`);
   if (r) {
     let t = e.offsetHeight,
@@ -81,15 +124,38 @@ d && d.addEventListener(`click`, () => {
   }
 });
 
-var p = new IntersectionObserver(e => {
-  e.forEach(e => {
-    e.isIntersecting && e.target.classList.add(`visible`)
-  });
-  let t = document.querySelectorAll(`.catalog-product-card, .schedule-card, .wa-cta-card, .faq-item`);
-  Array.from(t).every(e => e.classList.contains(`visible`)) && p.disconnect()
-}, { threshold: .12, rootMargin: `0px 0px -40px 0px` }),
+var f = () => {
+  document.querySelectorAll(`.carousel-container`).forEach(e => {
+    let t = e.querySelector(`.carousel-track`),
+      n = Array.from(t ? t.children : []),
+      r = e.querySelector(`.carousel-btn.next`),
+      i = e.querySelector(`.carousel-btn.prev`),
+      a = e.closest(`.catalog-product-img-wrap`);
+    if (!t || n.length <= 1) {
+      r && (r.style.display = `none`), i && (i.style.display = `none`);
+      return
+    }
+    let o = 0,
+      s = () => { t.style.transform = `translateX(-${o * 100}%)` },
+      c = () => { a && a.classList.add(`is-carousel-active`) };
+    r && r.addEventListener(`click`, () => {
+      o = o + 1 >= n.length ? 0 : o + 1, s()
+    }), i && i.addEventListener(`click`, () => {
+      o = o - 1 < 0 ? n.length - 1 : o - 1, s()
+    }), e.addEventListener(`mouseenter`, c), e.addEventListener(`mouseleave`, () => {
+      a && a.classList.remove(`is-carousel-active`)
+    }), e.addEventListener(`touchstart`, c, { passive: !0 }), s()
+  })
+},
+  p = new IntersectionObserver(e => {
+    e.forEach(e => {
+      e.isIntersecting && e.target.classList.add(`visible`)
+    });
+    let t = document.querySelectorAll(`.catalog-product-card, .service-card, .schedule-card, .wa-cta-card, .faq-item`);
+    Array.from(t).every(e => e.classList.contains(`visible`)) && p.disconnect()
+  }, { threshold: .12, rootMargin: `0px 0px -40px 0px` }),
   m = () => {
-    document.querySelectorAll(`.catalog-product-card, .schedule-card, .wa-cta-card, .faq-item`).forEach((e, t) => {
+    document.querySelectorAll(`.catalog-product-card, .service-card, .schedule-card, .wa-cta-card, .faq-item`).forEach((e, t) => {
       e.classList.add(`fade-in`), e.style.transitionDelay = `${t % 3 * .15}s`, p.observe(e)
     })
   };
@@ -107,6 +173,16 @@ document.querySelectorAll(`a[href^="#"]`).forEach(t => {
     }
   })
 });
+
+var h = document.getElementById(`floating-wa`);
+if (h) {
+  let e = !1;
+  window.addEventListener(`scroll`, () => {
+    e ||= (window.requestAnimationFrame(() => {
+      window.scrollY > 400 ? (h.style.opacity = `1`, h.style.transform = `scale(1)`) : (h.style.opacity = `0`, h.style.transform = `scale(0.8)`), e = !1
+    }), !0)
+  }, { passive: !0 }), h.style.opacity = `0`, h.style.transform = `scale(0.8)`
+}
 
 var g = document.getElementById(`lang-toggle`),
   _ = localStorage.getItem(`shilis_lang`) || `ES`,
@@ -146,15 +222,50 @@ function b(e, t = {}) {
   r.count++, t.id && (r.details[t.id] = (r.details[t.id] || 0) + 1), n[e] = r, localStorage.setItem(y, JSON.stringify(n))
 }
 
-var x = document.getElementById(`theme-toggle`),
-  S = `<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:#F59E0B;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+var x = document.getElementById(`theme-toggle`);
+x && x.querySelector(`.moon-icon`);
+var S = `<svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:#F59E0B;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
   C = `<svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;color:#F59E0B;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
-
 localStorage.getItem(`shilis_theme`) === `dark` && (document.body.classList.add(`dark-mode`), x && (x.innerHTML = S)), x && x.addEventListener(`click`, () => {
   document.body.classList.toggle(`dark-mode`);
   let e = document.body.classList.contains(`dark-mode`);
   x.innerHTML = e ? S : C, localStorage.setItem(`shilis_theme`, e ? `dark` : `light`)
 });
+
+// Modificado el Topping por si alguna vez quieres ofrecer Asistencia Remota adicional
+var w = { "Soporte Remoto VIP": { price: 5, emoji: `💻` } },
+  T = { "Windows 11 Profesional": [`Soporte Remoto VIP`], "Windows 10 Professional": [`Soporte Remoto VIP`] };
+function E(e) {
+  let t = T[e];
+  if (!t) return;
+  let n = document.querySelector(`.topping-toast`);
+  n && n.remove();
+  let r = document.createElement(`div`);
+  r.className = `topping-toast`;
+  let i = t[0],
+    a = w[i];
+  r.innerHTML = `
+    <div class="topping-toast-content">
+      <span class="topping-emoji">${a.emoji}</span>
+      <div class="topping-text">
+        <p><strong>${_ === `EN` ? `Add remote support!` : `¡Asegura tu instalación!`}</strong></p>
+        <p>${_ === `EN` ? `Add ${i} for only $${a.price}` : `Añade ${i} por solo $${a.price}`}</p>
+      </div>
+      <div class="topping-actions">
+        <button class="topping-btn-no" data-en="No, thanks" data-es="No, gracias">No, gracias</button>
+        <button class="topping-btn-yes" data-en="Add!" data-es="¡Añadir!">¡Añadir!</button>
+      </div>
+    </div>
+  `, document.body.appendChild(r), requestAnimationFrame(() => {
+    requestAnimationFrame(() => r.classList.add(`show`))
+  }), r.querySelector(`.topping-btn-no`).onclick = () => {
+    r.classList.remove(`show`), setTimeout(() => r.remove(), 300)
+  }, r.querySelector(`.topping-btn-yes`).onclick = () => {
+    H(i), r.classList.remove(`show`), setTimeout(() => r.remove(), 300)
+  }, setTimeout(() => {
+    r.parentElement && (r.classList.remove(`show`), setTimeout(() => r.remove(), 300))
+  }, 6e3)
+}
 
 var D = {
   "Windows 11 Profesional": { price: 12, emoji: `💻` },
@@ -168,11 +279,13 @@ function A() {
   localStorage.setItem(`shilis_cart`, JSON.stringify(k))
 }
 
-var j = document.getElementById(`nav-cart-badge`),
-  M = document.getElementById(`nav-cart-btn`),
+var j = document.getElementById(`cart-badge`),
+  M = document.getElementById(`nav-cart-badge`),
+  N = document.getElementById(`nav-cart-btn`),
   P = document.getElementById(`cart-sidebar`),
   F = document.getElementById(`cart-overlay`),
   I = document.getElementById(`cart-items`),
+  L = document.getElementById(`floating-cart`),
   R = document.getElementById(`close-cart`),
   z = document.getElementById(`checkout-btn`);
 
@@ -191,8 +304,8 @@ function V() {
     if (t.length === 0) I.innerHTML = `
         <div class="empty-cart">
           <div class="empty-cart-icon">🛒</div>
-          <p>${_ === `EN` ? `Your cart is empty` : `Tu carrito está vacío`}</p>
-          <p class="empty-cart-hint">${_ === `EN` ? `Add your favorite products` : `Agrega tus programas favoritos`}</p>
+          <p data-en="Your cart is empty" data-es="Tu carrito está vacío">${_ === `EN` ? `Your cart is empty` : `Tu carrito está vacío`}</p>
+          <p class="empty-cart-hint" data-en="Add your favorite software" data-es="Agrega tus programas favoritos">${_ === `EN` ? `Add your favorite products` : `Agrega tus programas favoritos`}</p>
         </div>`;
     else {
       t.forEach(([t, n]) => {
@@ -223,15 +336,17 @@ function V() {
       let n = B(),
         r = document.createElement(`div`);
       r.className = `cart-total-row`, r.innerHTML = `
-        <span>${_ === `EN` ? `💰 Estimated Total` : `💰 Total estimado`}</span>
+        <span data-en="💰 Estimated Total" data-es="💰 Total estimado">${_ === `EN` ? `💰 Estimated Total` : `💰 Total estimado`}</span>
         <strong>$${n.toFixed(2)}</strong>`, I.appendChild(r);
       let i = document.createElement(`div`);
-      i.className = `cart-motivation`;
-      i.innerHTML = `<span>⭐ ${_ === `EN` ? `Our team of experts is waiting for you` : `¡Nuestro equipo de expertos te espera!`}</span>`;
-      I.appendChild(i);
+      if (i.className = `cart-motivation`, n < 10) {
+        let e = (10 - n).toFixed(2);
+        i.innerHTML = _ === `EN` ? `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Add <strong>$${e} more</strong> for special discounts 🎉</span>` : `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉</span>`
+      } else n < 20 ? i.innerHTML = _ === `EN` ? `<span data-en="⭐ Excellent choice! You can add another product 💻" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ Excellent choice! You can add another product</span>` : `<span data-en="⭐ Excellent choice! You can add another product" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ ¡Excelente elección! Puedes agregar otro programa</span>` : i.innerHTML = _ === `EN` ? `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te esperan">🌟 Excelent! Our team of experts is waiting for you</span>` : `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te espera">🌟 ¡Excelente! Nuestro equipo de expertos te espera</span>`;
+      I.appendChild(i)
     }
   }
-  if (j && (j.innerText = e, j.style.display = e > 0 ? `flex` : `none`), document.querySelectorAll(`.qty-counter-row`).forEach(e => {
+  if (j && (j.innerText = e, j.style.display = e > 0 ? `flex` : `none`), M && (M.innerText = e, M.style.display = e > 0 ? `flex` : `none`), document.querySelectorAll(`.qty-counter-row`).forEach(e => {
     let t = e.querySelector(`.qc-num`),
       n = e.dataset.productName;
     if (t && n) {
@@ -243,12 +358,16 @@ function V() {
       t = Object.values(k).reduce((e, t) => e + t, 0),
       n = _ === `EN` ? `Order now` : `Pedir ahora`,
       r = _ === `EN` ? `Order via WhatsApp` : `Pedir vía WhatsApp`;
-    z.innerHTML = `<span>${t > 0 ? `${n} · $${e.toFixed(2)}` : r}</span>`, z.disabled = t === 0
+    z.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+      <span data-en="${t > 0 ? `Order now · $${e.toFixed(2)}` : `Order via WhatsApp`}" data-es="${t > 0 ? `Pedir ahora · $${e.toFixed(2)}` : `Pedir vía WhatsApp`}">${t > 0 ? `${n} · $${e.toFixed(2)}` : r}</span>`, z.disabled = t === 0
   } A()
 }
 
 function H(e) {
-  k[e] || (k[e] = 0), k[e]++, b(`add_to_cart`, { id: e }), V()
+  k[e] || (k[e] = 0), k[e]++, b(`add_to_cart`, { id: e }), V(), D[e] && T[e] && E(e), L && (L.classList.add(`cart-pop`), setTimeout(() => L.classList.remove(`cart-pop`), 400)), N && (N.classList.add(`cart-pop`), setTimeout(() => N.classList.remove(`cart-pop`), 400))
 }
 
 function U() {
@@ -267,9 +386,11 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let n = e.querySelector(`.catalog-product-info`),
     r = document.createElement(`div`);
   r.className = `qty-counters-wrapper`, t.forEach(({ name: e, price: n }) => {
-    let a = document.createElement(`div`);
+    let i = ``, // Ya no es necesario limpiar nombres de helados o yogures
+      a = document.createElement(`div`);
     a.className = `qty-counter-row`, a.dataset.productName = e, a.innerHTML = `
       <div class="qty-counter-label">
+        ${i ? `<span class="qty-variant-label">${i}</span>` : ``}
         <span class="qty-counter-price">$${n}</span>
       </div>
       <div class="qty-counter-controls">
@@ -281,14 +402,14 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
       s = a.querySelector(`.qc-plus`),
       c = a.querySelector(`.qc-num`);
     s.addEventListener(`click`, () => {
-      H(e), c.textContent = k[e] || 0, c.classList.remove(`qc-zero`)
+      H(e), c.textContent = k[e] || 0, c.classList.remove(`qc-zero`), c.classList.add(`qc-bump`), setTimeout(() => c.classList.remove(`qc-bump`), 280)
     }), o.addEventListener(`click`, () => {
       k[e] && k[e] > 0 && (k[e]--, k[e] === 0 && delete k[e], V());
       let t = k[e] || 0;
       c.textContent = t, t === 0 ? c.classList.add(`qc-zero`) : c.classList.remove(`qc-zero`)
     }), r.appendChild(a)
   }), n && n.appendChild(r)
-}), [M].forEach(e => {
+}), [L, N].forEach(e => {
   e && e.addEventListener(`click`, () => U())
 }), [R, F].forEach(e => {
   e && e.addEventListener(`click`, () => {
@@ -300,8 +421,9 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
 
 var W = document.getElementById(`checkout-modal-overlay`),
   G = document.getElementById(`close-checkout`),
-  K = document.getElementById(`checkout-form`),
-  q = document.getElementById(`checkout-summary-view`);
+  K = document.getElementById(`checkout-form`);
+document.getElementById(`checkout-content-wrapper`);
+var q = document.getElementById(`checkout-summary-view`);
 
 function J() {
   b(`checkout_started`), K && (K.style.display = `flex`), q && (q.style.display = `none`), W.classList.add(`visible`), document.body.style.overflow = `hidden`
@@ -318,18 +440,18 @@ function X(e) {
   let t = Object.entries(k);
   if (t.length === 0) return;
   let n = B().toFixed(2),
-    r = { details: _ === `EN` ? `Customer Details` : `Detalles del Cliente`, order: _ === `EN` ? `Order Summary` : `Resumen del Pedido`, total: _ === `EN` ? `Estimated Total` : `Total Estimado`, edit: _ === `EN` ? `Edit Details` : `Editar Detalles`, confirm: _ === `EN` ? `Confirm and Send` : `Confirmar y Enviar` },
+    r = { details: _ === `EN` ? `Customer Details` : `Detalles del Cliente`, order: _ === `EN` ? `Order Summary` : `Resumen del Pedido`, total: _ === `EN` ? `Estimated Total` : `Total Estimados`, edit: _ === `EN` ? `Edit Details` : `Editar Detalles`, confirm: _ === `EN` ? `Confirm and Send` : `Confirmar y Enviar` },
     i = t.map(([e, t]) => {
       let n = D[e] || { price: 0, emoji: `💻` },
         r = (n.price * t).toFixed(2);
-      return `<div class="summary-item" style="display:flex; justify-content:space-between; margin-bottom:8px;">
+      return `<div class="summary-item">
           <span>${n.emoji} ${t}x ${e}</span>
           <span>$${r}</span>
         </div>`
     }).join(``);
   q.innerHTML = `
-<div class="checkout-summary-view" style="padding: 24px;">
-  <div class="summary-section" style="margin-bottom: 16px;">
+<div class="checkout-summary-view">
+  <div class="summary-section">
     <h3>${r.details}</h3>
     <div class="summary-details">
       <div><strong>Nombre:</strong> ${e.name}</div>
@@ -337,19 +459,24 @@ function X(e) {
       <div><strong>Teléfono:</strong> ${e.phone}</div>
     </div>
   </div>
-  <div class="summary-section" style="margin-bottom: 16px;">
+  <div class="summary-section">
     <h3>${r.order}</h3>
-    <div class="summary-items-list" style="max-height: 150px; overflow-y:auto;">
+    <div class="summary-items-list">
       ${i}
     </div>
-    <div class="summary-total" style="display:flex; justify-content:space-between; font-weight:bold; margin-top:10px; border-top:1px solid #ddd; padding-top:8px;">
+    <div class="summary-total">
       <span>${r.total}</span>
       <span>$${n}</span>
     </div>
   </div>
-  <div class="summary-actions" style="display:flex; gap:10px;">
-    <button class="btn-edit-order" id="btn-edit-order" style="flex:1; padding:10px; border-radius:8px; border:1px solid #ccc; background:#f5f5f5; cursor:pointer;">${r.edit}</button>
-    <button class="btn-confirm-order" id="btn-confirm-order" style="flex:1; padding:10px; border-radius:8px; border:none; background:#25d366; color:#fff; font-weight:bold; cursor:pointer;">${r.confirm}</button>
+  <div class="summary-actions">
+    <button class="btn-edit-order" id="btn-edit-order">${r.edit}</button>
+    <button class="btn-confirm-order" id="btn-confirm-order">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;margin-right:8px;">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+      ${r.confirm}
+    </button>
   </div>
 </div>
 `, K && (K.style.display = `none`), q.style.display = `block`, document.getElementById(`btn-edit-order`).onclick = () => {
@@ -379,7 +506,9 @@ K && K.addEventListener(`submit`, e => {
   let t = { name: document.getElementById(`cust-name`).value, address: document.getElementById(`cust-address`).value, phone: document.getElementById(`cust-phone`).value };
   Object.keys(k).length !== 0 && X(t)
 }), V(), document.addEventListener(`DOMContentLoaded`, () => {
-  m(), setTimeout(() => {
+  f(), m(), `serviceWorker` in navigator && window.addEventListener(`load`, () => {
+    navigator.serviceWorker.register(`/sw.js`).then(e => console.log(`SW registered!`, e)).catch(e => console.log(`SW registration failed:`, e))
+  }), setTimeout(() => {
     let e = document.getElementById(`splash-screen`);
     e && (e.classList.add(`hidden`), setTimeout(() => e.style.display = `none`, 800))
   }, 800), setTimeout(() => {
@@ -395,6 +524,14 @@ K && K.addEventListener(`submit`, e => {
   t && t.addEventListener(`click`, () => {
     localStorage.setItem(`shilis_promo_shown`, `true`)
   });
+  let n = !1;
+  window.addEventListener(`scroll`, () => {
+    n ||= (window.requestAnimationFrame(() => {
+      let e = window.scrollY,
+        t = document.querySelector(`.hero-img`);
+      t && e < window.innerHeight && (t.style.transform = `translateY(${e * .25}px)`), n = !1
+    }), !0)
+  }, { passive: !0 });
   let r = document.querySelector(`.hero`);
   if (r)
     for (let e = 0; e < 35; e++) {
@@ -407,7 +544,7 @@ K && K.addEventListener(`submit`, e => {
         <div style="font-size: 1.1rem; color: #000;">
             Estás a un paso de tener tu PC al 100%. 💻<br>
             <b>Licencias originales, soporte remoto y garantía total.</b><br>
-            ¡Trabaja sin interrupciones!
+            ¡Trabaja y juega sin interrupciones!
         </div>
     `, confirmButtonText: `¡Ver Catálogo! 💻`, confirmButtonColor: `#E67E22`, backdrop: `rgba(230, 126, 34, 0.1)`, showClass: { popup: `animate__animated animate__zoomIn` }
     }).then(e => {
