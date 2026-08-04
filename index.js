@@ -32,7 +32,6 @@ r.length > 0 && r.forEach(e => {
 
 function i(e) {
   document.querySelectorAll(`.catalog-product-card`).forEach(t => {
-    // Si decides usar categorías en un futuro, se definen aquí
     t.style.display = `block`;
     t.classList.remove(`visible`);
     requestAnimationFrame(() => t.classList.add(`visible`));
@@ -232,7 +231,6 @@ localStorage.getItem(`shilis_theme`) === `dark` && (document.body.classList.add(
   x.innerHTML = e ? S : C, localStorage.setItem(`shilis_theme`, e ? `dark` : `light`)
 });
 
-// Modificado el Topping por si alguna vez quieres ofrecer Asistencia Remota adicional
 var w = { "Soporte Remoto VIP": { price: 5, emoji: `💻` } },
   T = { "Windows 11 Profesional": [`Soporte Remoto VIP`], "Windows 10 Professional": [`Soporte Remoto VIP`] };
 function E(e) {
@@ -249,7 +247,7 @@ function E(e) {
       <span class="topping-emoji">${a.emoji}</span>
       <div class="topping-text">
         <p><strong>${_ === `EN` ? `Add remote support!` : `¡Asegura tu instalación!`}</strong></p>
-        <p>${_ === `EN` ? `Add ${i} for only $${a.price}` : `Añade ${i} por solo $${a.price}`}</p>
+        <p>${_ === `EN` ? `Add ${i} for only Bs ${a.price}` : `Añade ${i} por solo Bs ${a.price}`}</p>
       </div>
       <div class="topping-actions">
         <button class="topping-btn-no" data-en="No, thanks" data-es="No, gracias">No, gracias</button>
@@ -267,10 +265,11 @@ function E(e) {
   }, 6e3)
 }
 
+// Variables base del carrito (Los precios se sobrescriben con SheetDB)
 var D = {
-  "Windows 11 Profesional": { price: 12, emoji: `💻` },
-  "Windows 10 Professional": { price: 12, emoji: `💻` },
-  "Microsoft Office 2021": { price: 15, emoji: `💿` }
+  "Windows 11 Profesional": { price: 0, emoji: `💻` },
+  "Windows 10 Professional": { price: 0, emoji: `💻` },
+  "Microsoft Office 2021": { price: 0, emoji: `💿` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
@@ -318,7 +317,7 @@ function V() {
             <span class="cart-item-emoji">${r.emoji}</span>
             <div>
               <strong>${t}</strong>
-              <span class="cart-item-price"><strong>$${i}</strong> ($${r.price} ${_ === `EN` ? `each` : `c/u`})</span>
+              <span class="cart-item-price"><strong>Bs ${i}</strong> (Bs ${r.price} ${_ === `EN` ? `each` : `c/u`})</span>
             </div>
           </div>
           <div class="cart-item-qty">
@@ -337,11 +336,11 @@ function V() {
         r = document.createElement(`div`);
       r.className = `cart-total-row`, r.innerHTML = `
         <span data-en="💰 Estimated Total" data-es="💰 Total estimado">${_ === `EN` ? `💰 Estimated Total` : `💰 Total estimado`}</span>
-        <strong>$${n.toFixed(2)}</strong>`, I.appendChild(r);
+        <strong>Bs ${n.toFixed(2)}</strong>`, I.appendChild(r);
       let i = document.createElement(`div`);
       if (i.className = `cart-motivation`, n < 10) {
         let e = (10 - n).toFixed(2);
-        i.innerHTML = _ === `EN` ? `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Add <strong>$${e} more</strong> for special discounts 🎉</span>` : `<span data-en="📦 Add <strong>$${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉">📦 Añade <strong>$${e} más</strong> para obtener descuentos especiales 🎉</span>`
+        i.innerHTML = _ === `EN` ? `<span data-en="📦 Add <strong>Bs ${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>Bs ${e} más</strong> para obtener descuentos especiales 🎉">📦 Add <strong>Bs ${e} more</strong> for special discounts 🎉</span>` : `<span data-en="📦 Add <strong>Bs ${e} more</strong> for special discounts 🎉" data-es="📦 Añade <strong>Bs ${e} más</strong> para obtener descuentos especiales 🎉">📦 Añade <strong>Bs ${e} más</strong> para obtener descuentos especiales 🎉</span>`
       } else n < 20 ? i.innerHTML = _ === `EN` ? `<span data-en="⭐ Excellent choice! You can add another product 💻" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ Excellent choice! You can add another product</span>` : `<span data-en="⭐ Excellent choice! You can add another product" data-es="⭐ ¡Excelente elección! Puedes agregar otro programa">⭐ ¡Excelente elección! Puedes agregar otro programa</span>` : i.innerHTML = _ === `EN` ? `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te esperan">🌟 Excelent! Our team of experts is waiting for you</span>` : `<span data-en="🌟 Excelent! Our team of experts is waiting for you" data-es="🌟 ¡Excelente! Nuestro equipo de expertos te espera">🌟 ¡Excelente! Nuestro equipo de expertos te espera</span>`;
       I.appendChild(i)
     }
@@ -362,7 +361,7 @@ function V() {
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
       </svg>
-      <span data-en="${t > 0 ? `Order now · $${e.toFixed(2)}` : `Order via WhatsApp`}" data-es="${t > 0 ? `Pedir ahora · $${e.toFixed(2)}` : `Pedir vía WhatsApp`}">${t > 0 ? `${n} · $${e.toFixed(2)}` : r}</span>`, z.disabled = t === 0
+      <span data-en="${t > 0 ? `Order now · Bs ${e.toFixed(2)}` : `Order via WhatsApp`}" data-es="${t > 0 ? `Pedir ahora · Bs ${e.toFixed(2)}` : `Pedir vía WhatsApp`}">${t > 0 ? `${n} · Bs ${e.toFixed(2)}` : r}</span>`, z.disabled = t === 0
   } A()
 }
 
@@ -386,12 +385,12 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let n = e.querySelector(`.catalog-product-info`),
     r = document.createElement(`div`);
   r.className = `qty-counters-wrapper`, t.forEach(({ name: e, price: n }) => {
-    let i = ``, // Ya no es necesario limpiar nombres de helados o yogures
+    let i = ``, 
       a = document.createElement(`div`);
     a.className = `qty-counter-row`, a.dataset.productName = e, a.innerHTML = `
       <div class="qty-counter-label">
         ${i ? `<span class="qty-variant-label">${i}</span>` : ``}
-        <span class="qty-counter-price">$${n}</span>
+        <span class="qty-counter-price"></span>
       </div>
       <div class="qty-counter-controls">
         <button class="qc-btn qc-minus" aria-label="Restar">−</button>
@@ -446,7 +445,7 @@ function X(e) {
         r = (n.price * t).toFixed(2);
       return `<div class="summary-item">
           <span>${n.emoji} ${t}x ${e}</span>
-          <span>$${r}</span>
+          <span>Bs ${r}</span>
         </div>`
     }).join(``);
   q.innerHTML = `
@@ -466,7 +465,7 @@ function X(e) {
     </div>
     <div class="summary-total">
       <span>${r.total}</span>
-      <span>$${n}</span>
+      <span>Bs ${n}</span>
     </div>
   </div>
   <div class="summary-actions">
@@ -495,8 +494,8 @@ function Z(e) {
   r += `*DETALLES DEL PEDIDO* 📝\n`, r += `👤 *Nombre:* ${e.name}\n`, r += `✉️ *Correo:* ${e.address}\n`, r += `📞 *Teléfono:* ${e.phone}\n\n`, r += `*PRODUCTOS:*\n`, t.forEach(([e, t]) => {
     let n = D[e],
       i = n ? (n.price * t).toFixed(2) : `?`;
-    r += `${n ? n.emoji : `💻`} ${t}x ${e} - $${i}\n`
-  }), r += `\n💰 *Total: $${n}*\n\n¡Gracias!`;
+    r += `${n ? n.emoji : `💻`} ${t}x ${e} - Bs ${i}\n`
+  }), r += `\n💰 *Total: Bs ${n}*\n\n¡Gracias!`;
   let i = `https://wa.me/584248930224?text=${encodeURIComponent(r)}`;
   window.open(i, `_blank`), Y()
 }
@@ -560,3 +559,69 @@ K && K.addEventListener(`submit`, e => {
     })
   })
 });
+
+// ==========================================
+// SINCRONIZACIÓN DE PRECIOS CON SHEETDB (API)
+// ==========================================
+const urlSheetDB = 'https://sheetdb.io/api/v1/1szi67i3qgd8i';
+
+// Tu encabezado exacto
+const nombreColumnaPrecio = 'SERVICIO TÉCNICO INSTALACIÓN ($)'; 
+
+async function sincronizarPreciosSheetDB() {
+    try {
+        const respuesta = await fetch(urlSheetDB);
+        const datos = await respuesta.json();
+        
+        // En SheetDB, la Fila 1 de tu Excel se usa como los encabezados (claves JSON).
+        // Por lo tanto, la Fila 7 de tu Excel corresponde al índice 5 del arreglo.
+        // Fila 8 = índice 6
+        // Fila 9 = índice 7
+
+        const getPrecio = (indiceFila) => {
+            if(datos.length > indiceFila) {
+                const valor = datos[indiceFila][nombreColumnaPrecio];
+                // Removemos posibles espacios o símbolos antes de convertir a número
+                return parseFloat(String(valor).trim());
+            }
+            return NaN;
+        };
+
+        const precioOffice = getPrecio(5);  // Fila 7 (Casilla E7)
+        const precioWin11 = getPrecio(6);   // Fila 8 (Casilla E8)
+        const precioWin10 = getPrecio(7);   // Fila 9 (Casilla E9)
+
+        // Función para actualizar el carrito (D) y el diseño visual (HTML)
+        const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
+            if (D[nombre] && !isNaN(nuevoPrecio)) {
+                // 1. Actualizamos el precio interno (usado por el carrito)
+                D[nombre].price = nuevoPrecio; 
+                
+                // 2. Actualizamos el precio visual en el HTML
+                const tarjeta = document.getElementById(idHTML);
+                if (tarjeta) {
+                    const etiquetaPrecio = tarjeta.querySelector('.catalog-price-badge strong');
+                    if (etiquetaPrecio) {
+                        etiquetaPrecio.innerText = "Bs " + nuevoPrecio.toFixed(2);
+                    }
+                }
+            }
+        };
+
+        // Aplicamos los cambios
+        actualizarProducto("Microsoft Office 2021", "office-2021", precioOffice);
+        actualizarProducto("Windows 11 Profesional", "Windows-11.Professional", precioWin11);
+        actualizarProducto("Windows 10 Professional", "Windows-10-Professional", precioWin10);
+
+        // Si el carrito está renderizado, lo actualizamos visualmente
+        if (typeof V === 'function') {
+            V(); 
+        }
+
+    } catch (error) {
+        console.error("No se pudieron cargar los precios de SheetDB:", error);
+    }
+}
+
+// Ejecutamos la función de una vez cuando cargue el documento
+document.addEventListener('DOMContentLoaded', sincronizarPreciosSheetDB);
