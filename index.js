@@ -269,7 +269,8 @@ function E(e) {
 var D = {
   "Windows 11 Profesional": { price: 0, emoji: `💻` },
   "Windows 10 Professional": { price: 0, emoji: `💻` },
-  "Microsoft Office 2021": { price: 0, emoji: `💿` }
+  "Microsoft Office 2021": { price: 0, emoji: `💿` },
+  "Microsoft Office 2024": { price: 0, emoji: `💿` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
@@ -377,7 +378,8 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let t = {
     "Windows-11.Professional": [{ name: `Windows 11 Profesional`, price: 12 }],
     "Windows-10-Professional": [{ name: `Windows 10 Professional`, price: 12 }],
-    "office-2021": [{ name: `Microsoft Office 2021`, price: 15 }]
+    "office-2021": [{ name: `Microsoft Office 2021`, price: 12 }],
+    "office-2024": [{ name: `Microsoft Office 2024`, price: 12 }]
   }[e.id];
 
   if (!t) return;
@@ -586,10 +588,12 @@ async function sincronizarPreciosSheetDB() {
             }
             return NaN;
         };
-
-        const precioOffice = getPrecio(5);  // Fila 7 (Casilla E7)
+        
+        const precioOffice2024 = getPrecio(4) // Fila 6 (Casilla E6)
+        const precioOffice2021 = getPrecio(5);  // Fila 7 (Casilla E7)
         const precioWin11 = getPrecio(6);   // Fila 8 (Casilla E8)
         const precioWin10 = getPrecio(7);   // Fila 9 (Casilla E9)
+        
 
         // Función para actualizar el carrito (D) y el diseño visual (HTML)
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
@@ -609,7 +613,8 @@ async function sincronizarPreciosSheetDB() {
         };
 
         // Aplicamos los cambios
-        actualizarProducto("Microsoft Office 2021", "office-2021", precioOffice);
+        actualizarProducto("Microsoft Office 2024", "office-2024", precioOffice2024);
+        actualizarProducto("Microsoft Office 2021", "office-2021", precioOffice2021);
         actualizarProducto("Windows 11 Profesional", "Windows-11.Professional", precioWin11);
         actualizarProducto("Windows 10 Professional", "Windows-10-Professional", precioWin10);
 
