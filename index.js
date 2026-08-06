@@ -539,27 +539,6 @@ K && K.addEventListener(`submit`, e => {
       let e = document.createElement(`div`);
       e.className = `particle`, e.style.left = Math.random() * 100 + `%`, e.style.top = Math.random() * 100 + `%`, e.style.animationDuration = Math.random() * 3 + 3 + `s`, e.style.animationDelay = Math.random() * 2 + `s`, r.appendChild(e)
     }
-  let i = () => {
-    confetti({ particleCount: 100, spread: 70, origin: { y: .6 }, colors: [`#E67E22`, `#F1C40F`, `#FFFFFF`, `#FFD700`], disableForReducedMotion: !0 }), Swal.fire({
-      title: `¡Es momento de optimizar tu equipo! 🚀`, html: `
-        <div style="font-size: 1.1rem; color: #000;">
-            Estás a un paso de tener tu PC al 100%. 💻<br>
-            <b>Licencias originales, soporte remoto y garantía total.</b><br>
-            ¡Trabaja y juega sin interrupciones!
-        </div>
-    `, confirmButtonText: `¡Ver Catálogo! 💻`, confirmButtonColor: `#E67E22`, backdrop: `rgba(230, 126, 34, 0.1)`, showClass: { popup: `animate__animated animate__zoomIn` }
-    }).then(e => {
-      if (e.isConfirmed) {
-        let e = document.getElementById(`productos`);
-        e && e.scrollIntoView({ behavior: `smooth` })
-      }
-    })
-  };
-  document.querySelectorAll(`a[href="#productos"]`).forEach(e => {
-    e.addEventListener(`click`, e => {
-      e.preventDefault(), i()
-    })
-  })
 });
 
 // ==========================================
