@@ -3842,3 +3842,24 @@ body.dark-mode .flavor-price {
     max-width: 100%;
     height: 300px; /* Altura optimizada para móviles */
 }
+
+/* --- CORRECCIÓN PARA BOTONES DE CANTIDAD EN MÓVILES --- */
+@media (max-width: 540px) {
+    .qty-counter-row {
+        padding: 6px 8px;
+        gap: 4px;
+    }
+    .qty-counter-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .qc-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    .qc-num {
+        min-width: 24px;
+        font-size: 0.9rem;
+    }
+}
