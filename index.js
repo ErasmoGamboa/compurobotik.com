@@ -346,14 +346,7 @@ function V() {
       I.appendChild(i)
     }
   }
-  if (j && (j.innerText = e, j.style.display = e > 0 ? `flex` : `none`), M && (M.innerText = e, M.style.display = e > 0 ? `flex` : `none`), document.querySelectorAll(`.qty-counter-row`).forEach(e => {
-    let t = e.querySelector(`.qc-num`),
-      n = e.dataset.productName;
-    if (t && n) {
-      let e = k[n] || 0;
-      t.textContent = e, e === 0 ? t.classList.add(`qc-zero`) : t.classList.remove(`qc-zero`)
-    }
-  }), z) {
+  if (j && (j.innerText = e, j.style.display = e > 0 ? `flex` : `none`), M && (M.innerText = e, M.style.display = e > 0 ? `flex` : `none`), z) {
     let e = B(),
       t = Object.values(k).reduce((e, t) => e + t, 0),
       n = _ === `EN` ? `Order now` : `Pedir ahora`,
@@ -387,28 +380,58 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let n = e.querySelector(`.catalog-product-info`),
     r = document.createElement(`div`);
   r.className = `qty-counters-wrapper`, t.forEach(({ name: e, price: n }) => {
+    let localQty = 1;
     let i = ``, 
       a = document.createElement(`div`);
-    a.className = `qty-counter-row`, a.dataset.productName = e, a.innerHTML = `
-      <div class="qty-counter-label">
-        ${i ? `<span class="qty-variant-label">${i}</span>` : ``}
-        <span class="qty-counter-price"></span>
+    a.className = `atc-wrapper`, a.innerHTML = `
+      <div class="qty-counter-row">
+        <div class="qty-counter-label">
+          ${i ? `<span class="qty-variant-label">${i}</span>` : ``}
+          <span class="qty-counter-price" style="color: #888; font-size: 0.85rem;">Cantidad:</span>
+        </div>
+        <div class="qty-counter-controls">
+          <button class="qc-btn qc-minus" aria-label="Restar">−</button>
+          <span class="qc-num">1</span>
+          <button class="qc-btn qc-plus" aria-label="Sumar">+</button>
+        </div>
       </div>
-      <div class="qty-counter-controls">
-        <button class="qc-btn qc-minus" aria-label="Restar">−</button>
-        <span class="qc-num qc-zero">0</span>
-        <button class="qc-btn qc-plus" aria-label="Sumar">+</button>
-      </div>`;
+      <button class="add-to-cart-btn">
+        <span>Añadir al carrito</span>
+      </button>`;
+    
     let o = a.querySelector(`.qc-minus`),
       s = a.querySelector(`.qc-plus`),
-      c = a.querySelector(`.qc-num`);
+      c = a.querySelector(`.qc-num`),
+      addBtn = a.querySelector(`.add-to-cart-btn`);
+
     s.addEventListener(`click`, () => {
-      H(e), c.textContent = k[e] || 0, c.classList.remove(`qc-zero`), c.classList.add(`qc-bump`), setTimeout(() => c.classList.remove(`qc-bump`), 280)
-    }), o.addEventListener(`click`, () => {
-      k[e] && k[e] > 0 && (k[e]--, k[e] === 0 && delete k[e], V());
-      let t = k[e] || 0;
-      c.textContent = t, t === 0 ? c.classList.add(`qc-zero`) : c.classList.remove(`qc-zero`)
-    }), r.appendChild(a)
+      localQty++;
+      c.textContent = localQty;
+      c.classList.add(`qc-bump`);
+      setTimeout(() => c.classList.remove(`qc-bump`), 280);
+    });
+    
+    o.addEventListener(`click`, () => {
+      if (localQty > 1) {
+        localQty--;
+        c.textContent = localQty;
+      }
+    });
+
+    addBtn.addEventListener(`click`, () => {
+      if (!k[e]) k[e] = 0;
+      k[e] += localQty;
+      b(`add_to_cart`, { id: e });
+      V();
+      if (D[e] && T[e]) E(e);
+      if (L) { L.classList.add(`cart-pop`); setTimeout(() => L.classList.remove(`cart-pop`), 400); }
+      if (N) { N.classList.add(`cart-pop`); setTimeout(() => N.classList.remove(`cart-pop`), 400); }
+      
+      localQty = 1;
+      c.textContent = localQty;
+    });
+
+    r.appendChild(a)
   }), n && n.appendChild(r)
 }), [L, N].forEach(e => {
   e && e.addEventListener(`click`, () => U())
@@ -546,41 +569,30 @@ K && K.addEventListener(`submit`, e => {
 // ==========================================
 const urlSheetDB = 'https://sheetdb.io/api/v1/1szi67i3qgd8i';
 
-// Tu encabezado exacto
 const nombreColumnaPrecio = 'SERVICIO TÉCNICO INSTALACIÓN ($)'; 
 
 async function sincronizarPreciosSheetDB() {
     try {
         const respuesta = await fetch(urlSheetDB);
         const datos = await respuesta.json();
-        
-        // En SheetDB, la Fila 1 de tu Excel se usa como los encabezados (claves JSON).
-        // Por lo tanto, la Fila 7 de tu Excel corresponde al índice 5 del arreglo.
-        // Fila 8 = índice 6
-        // Fila 9 = índice 7
 
         const getPrecio = (indiceFila) => {
             if(datos.length > indiceFila) {
                 const valor = datos[indiceFila][nombreColumnaPrecio];
-                // Removemos posibles espacios o símbolos antes de convertir a número
                 return parseFloat(String(valor).trim());
             }
             return NaN;
         };
         
-        const precioOffice2024 = getPrecio(4) // Fila 6 (Casilla E6)
-        const precioOffice2021 = getPrecio(5);  // Fila 7 (Casilla E7)
-        const precioWin11 = getPrecio(6);   // Fila 8 (Casilla E8)
-        const precioWin10 = getPrecio(7);   // Fila 9 (Casilla E9)
-        
+        const precioOffice2024 = getPrecio(4); 
+        const precioOffice2021 = getPrecio(5);  
+        const precioWin11 = getPrecio(6);   
+        const precioWin10 = getPrecio(7);   
 
-        // Función para actualizar el carrito (D) y el diseño visual (HTML)
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
             if (D[nombre] && !isNaN(nuevoPrecio)) {
-                // 1. Actualizamos el precio interno (usado por el carrito)
                 D[nombre].price = nuevoPrecio; 
                 
-                // 2. Actualizamos el precio visual en el HTML
                 const tarjeta = document.getElementById(idHTML);
                 if (tarjeta) {
                     const etiquetaPrecio = tarjeta.querySelector('.catalog-price-badge strong');
@@ -591,13 +603,11 @@ async function sincronizarPreciosSheetDB() {
             }
         };
 
-        // Aplicamos los cambios
         actualizarProducto("Microsoft Office 2024", "office-2024", precioOffice2024);
         actualizarProducto("Microsoft Office 2021", "office-2021", precioOffice2021);
         actualizarProducto("Windows 11 Profesional", "Windows-11.Professional", precioWin11);
         actualizarProducto("Windows 10 Professional", "Windows-10-Professional", precioWin10);
 
-        // Si el carrito está renderizado, lo actualizamos visualmente
         if (typeof V === 'function') {
             V(); 
         }
@@ -607,5 +617,4 @@ async function sincronizarPreciosSheetDB() {
     }
 }
 
-// Ejecutamos la función de una vez cuando cargue el documento
 document.addEventListener('DOMContentLoaded', sincronizarPreciosSheetDB);
