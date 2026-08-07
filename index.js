@@ -271,7 +271,8 @@ var D = {
   "Windows 10 Professional": { price: 0, emoji: `💻` },
   "Microsoft Office 2021": { price: 0, emoji: `💿` },
   "Microsoft Office 2024": { price: 0, emoji: `💿` },
-  "Microsoft 365 (12 Meses)": { price: 0, emoji: `☁️` }
+  "Microsoft 365 (12 Meses)": { price: 0, emoji: `☁️` },
+  "Microsoft Project 2024 LTSC": { price: 0, emoji: `📊` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
@@ -374,7 +375,8 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
     "Windows-10-Professional": [{ name: `Windows 10 Professional`, price: 12 }],
     "office-2021": [{ name: `Microsoft Office 2021`, price: 12 }],
     "office-2024": [{ name: `Microsoft Office 2024`, price: 12 }],
-    "microsoft-365": [{ name: `Microsoft 365 (12 Meses)`, price: 12 }]
+    "microsoft-365": [{ name: `Microsoft 365 (12 Meses)`, price: 12 }],
+    "project-2024-ltsc": [{ name: `Microsoft Project 2024 LTSC`, price: 12 }]
   }[e.id];
 
   if (!t) return;
@@ -545,6 +547,7 @@ async function sincronizarPreciosSheetDB() {
         const precioWin11 = getPrecio(6);   
         const precioWin10 = getPrecio(7);   
         const precioM365 = getPrecio(25); 
+        const precioProject2024 = getPrecio(17);
 
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
             if (D[nombre] && !isNaN(nuevoPrecio)) {
@@ -565,6 +568,7 @@ async function sincronizarPreciosSheetDB() {
         actualizarProducto("Windows 11 Profesional", "Windows-11.Professional", precioWin11);
         actualizarProducto("Windows 10 Professional", "Windows-10-Professional", precioWin10);
         actualizarProducto("Microsoft 365 (12 Meses)", "microsoft-365", precioM365);
+        actualizarProducto("Microsoft Project 2024 LTSC", "project-2024-ltsc", precioProject2024);
 
         if (typeof V === 'function') {
             V(); 
