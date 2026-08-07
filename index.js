@@ -543,6 +543,14 @@ async function sincronizarPreciosSheetDB() {
             }
             return NaN;
         };
+
+        const getPrecioColumna = (indiceFila, nombreColumna) => {
+            if(datos.length > indiceFila) {
+                const valor = datos[indiceFila][nombreColumna];
+                return parseFloat(String(valor).trim());
+            }
+            return NaN;
+        };
         
         const precioOffice2024 = getPrecio(4); 
         const precioOffice2021 = getPrecio(5);  
@@ -550,7 +558,7 @@ async function sincronizarPreciosSheetDB() {
         const precioWin10 = getPrecio(7);   
         const precioM365 = getPrecio(25); 
         const precioProject2024 = getPrecio(17);
-        const precioAdobe = getPrecio(15);
+        const precioAdobe = getPrecioColumna(15, 'IVA 16%');
 
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
             if (D[nombre] && !isNaN(nuevoPrecio)) {
