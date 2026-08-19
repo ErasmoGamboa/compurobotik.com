@@ -274,7 +274,8 @@ var D = {
   "Microsoft 365 (12 Meses)": { price: 0, emoji: `☁️` },
   "Microsoft Project 2024 LTSC": { price: 0, emoji: `📊` },
   "Adobe Creative Cloud - 1 Mes": { price: 0, emoji: `🎨` },
-  "Avast Premium Security - 1 Año": { price: 0, emoji: `🛡️` }
+  "Avast Premium Security - 1 Año": { price: 0, emoji: `🛡️` },
+  "McAfee Total Protection - 1 Año": { price: 0, emoji: `🛡️` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
@@ -380,7 +381,8 @@ document.querySelectorAll(`.catalog-product-card`).forEach(e => {
     "microsoft-365": [{ name: `Microsoft 365 (12 Meses)`, price: 12 }],
     "project-2024-ltsc": [{ name: `Microsoft Project 2024 LTSC`, price: 12 }],
     "adobe-creative-cloud": [{ name: `Adobe Creative Cloud - 1 Mes`, price: 12 }],
-    "avast-premium-security": [{ name: `Avast Premium Security - 1 Año`, price: 12 }]
+    "avast-premium-security": [{ name: `Avast Premium Security - 1 Año`, price: 12 }],
+    "mcafee-total-protection": [{ name: `McAfee Total Protection - 1 Año`, price: 12 }]
   }[e.id];
 
   if (!t) return;
@@ -562,6 +564,7 @@ async function sincronizarPreciosSheetDB() {
         const precioProject2024 = getPrecio(17);
         const precioAdobe = getPrecioColumna(15, 'IVA 16%');
         const precioAvast = getPrecio(8); 
+        const precioMcAfee = getPrecio(106); // Ejemplo: Fila 9 de la hoja
 
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
             if (D[nombre] && !isNaN(nuevoPrecio)) {
@@ -585,6 +588,7 @@ async function sincronizarPreciosSheetDB() {
         actualizarProducto("Microsoft Project 2024 LTSC", "project-2024-ltsc", precioProject2024);
         actualizarProducto("Adobe Creative Cloud - 1 Mes", "adobe-creative-cloud", precioAdobe);
         actualizarProducto("Avast Premium Security - 1 Año", "avast-premium-security", precioAvast);
+        actualizarProducto("McAfee Total Protection - 1 Año", "mcafee-total-protection", precioMcAfee);
 
         if (typeof V === 'function') {
             V(); 
