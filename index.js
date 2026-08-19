@@ -564,7 +564,7 @@ async function sincronizarPreciosSheetDB() {
         const precioProject2024 = getPrecio(17);
         const precioAdobe = getPrecioColumna(15, 'IVA 16%');
         const precioAvast = getPrecio(8); 
-        const precioMcAfee = getPrecio(106); // Ejemplo: Fila 9 de la hoja
+        const precioMcAfee = getPrecio(106); 
 
         const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
             if (D[nombre] && !isNaN(nuevoPrecio)) {
