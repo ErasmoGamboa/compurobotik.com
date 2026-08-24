@@ -267,15 +267,10 @@ function E(e) {
 
 // Variables base del carrito (Incluyendo nuevos productos)
 var D = {
-  "Windows 11 Profesional": { price: 0, emoji: `💻` },
-  "Windows 10 Professional": { price: 0, emoji: `💻` },
-  "Microsoft Office 2021": { price: 0, emoji: `💿` },
-  "Microsoft Office 2024": { price: 0, emoji: `💿` },
-  "Microsoft 365 (12 Meses)": { price: 0, emoji: `☁️` },
-  "Microsoft Project 2024 LTSC": { price: 0, emoji: `📊` },
-  "Adobe Creative Cloud - 1 Mes": { price: 0, emoji: `🎨` },
-  "Avast Premium Security - 1 Año": { price: 0, emoji: `🛡️` },
-  "McAfee Total Protection - 1 Año": { price: 0, emoji: `🛡️` }
+  "Microsoft Office 2024 Professional Plus - Activación Telefónica": { price: 0, emoji: `💿` },
+  "Microsoft Office 2021 Professional Plus – Activacion Telefónica": { price: 0, emoji: `💿` },
+  "Windows 11 Profesional - Licencia Digital": { price: 0, emoji: `💻` },
+  "Windows 10 Profesional - Licencia Digital": { price: 0, emoji: `💻` }
 },
   O = localStorage.getItem(`shilis_cart`),
   k = O ? JSON.parse(O) : {};
@@ -374,7 +369,7 @@ function U() {
 
 document.querySelectorAll(`.catalog-product-card`).forEach(e => {
   let t = {
-    "Windows-11.Professional": [{ name: `Windows 11 Profesional`, price: 12 }],
+    "Windows-11-Professional": [{ name: `Windows 11 Profesional`, price: 12 }],
     "Windows-10-Professional": [{ name: `Windows 10 Professional`, price: 12 }],
     "office-2021": [{ name: `Microsoft Office 2021`, price: 12 }],
     "office-2024": [{ name: `Microsoft Office 2024`, price: 12 }],
@@ -528,75 +523,139 @@ K && K.addEventListener(`submit`, e => {
     }
 });
 
-// ==========================================
-// SINCRONIZACIÓN DE PRECIOS CON SHEETDB (API)
-// ==========================================
-const urlSheetDB = 'https://sheetdb.io/api/v1/1szi67i3qgd8i';
 
-const nombreColumnaPrecio = 'SERVICIO TÉCNICO INSTALACIÓN ($)'; 
+const NOMBRE_PESTANA = 'Productos'; // O el nombre de tu pestaña en Google Sheets
+const urlSheetDBPorPestana = `https://sheetdb.io/api/v1/1szi67i3qgd8i?sheet=${encodeURIComponent(NOMBRE_PESTANA)}`;
 
-async function sincronizarPreciosSheetDB() {
+async function cargarProductosDinamicos() {
     try {
-        const respuesta = await fetch(urlSheetDB);
+        const respuesta = await fetch(urlSheetDBPorPestana);
         const datos = await respuesta.json();
 
-        const getPrecio = (indiceFila) => {
-            if(datos.length > indiceFila) {
-                const valor = datos[indiceFila][nombreColumnaPrecio];
-                return parseFloat(String(valor).trim());
-            }
-            return NaN;
-        };
+        if (!Array.isArray(datos)) {
+            console.error("Respuesta no válida de SheetDB:", datos);
+            return;
+        }
 
-        const getPrecioColumna = (indiceFila, nombreColumna) => {
-            if(datos.length > indiceFila) {
-                const valor = datos[indiceFila][nombreColumna];
-                return parseFloat(String(valor).trim());
-            }
-            return NaN;
-        };
-        
-        const precioOffice2024 = getPrecio(4); 
-        const precioOffice2021 = getPrecio(5);  
-        const precioWin11 = getPrecio(6);   
-        const precioWin10 = getPrecio(7);   
-        const precioM365 = getPrecio(25); 
-        const precioProject2024 = getPrecio(17);
-        const precioAdobe = getPrecioColumna(15, 'IVA 16%');
-        const precioAvast = getPrecio(8); 
-        const precioMcAfee = getPrecio(102); 
+        const contenedorGrid = document.getElementById('dynamic-catalog-grid');
+        if (!contenedorGrid) return;
 
-        const actualizarProducto = (nombre, idHTML, nuevoPrecio) => {
-            if (D[nombre] && !isNaN(nuevoPrecio)) {
-                D[nombre].price = nuevoPrecio; 
-                
-                const tarjeta = document.getElementById(idHTML);
-                if (tarjeta) {
-                    const etiquetaPrecio = tarjeta.querySelector('.catalog-price-badge strong');
-                    if (etiquetaPrecio) {
-                        etiquetaPrecio.innerText = "Bs " + nuevoPrecio.toFixed(2);
-                    }
+        contenedorGrid.innerHTML = '';
+
+        // Detectar el idioma actual guardado en localStorage (por defecto 'ES')
+        const idiomaActual = localStorage.getItem('shilis_lang') || 'ES';
+
+        datos.forEach((fila, index) => {
+            // Lectura exacta según los nombres de tus columnas en Google Sheets para los nombres
+            const nombreEs = (fila.nombre || fila.Nombre || '').trim();
+            const nombreEn = (fila.name || fila.Name || nombreEs).trim();
+            
+            // Lectura exacta para las descripciones
+            const descEs = (fila.Descripción || fila.descripcion || '').trim();
+            const descEn = (fila.Description || fila.description || descEs).trim();
+
+            let rawPrecio = fila.Precio || fila.precio || '0';
+            let precioLimpio = String(rawPrecio).replace(/[^0-9,\.-]/g, '').replace(/\./g, '').replace(',', '.');
+            let precioFinal = parseFloat(precioLimpio) || 0;
+
+            const rutaImagen = (fila.Imagen || fila.imagen || 'assets/logocompurobotik.jpg').trim();
+
+            if (!nombreEs) return;
+
+            const emojiDefault = nombreEs.toLowerCase().includes('windows') ? '💻' : (nombreEs.toLowerCase().includes('office') ? '💿' : '🛡️');
+            
+            if (!D[nombreEs]) {
+                D[nombreEs] = { price: precioFinal, emoji: emojiDefault };
+            } else {
+                D[nombreEs].price = precioFinal;
+            }
+
+            const nombreMostrado = idiomaActual === 'EN' ? nombreEn : nombreEs;
+            const descMostrada = idiomaActual === 'EN' ? descEn : descEs;
+
+            const cardId = `prod-dinamico-${index}`;
+            const tarjeta = document.createElement('div');
+            tarjeta.className = `catalog-product-card visible`;
+            tarjeta.id = cardId;
+
+            tarjeta.innerHTML = `
+                <div class="catalog-product-img-wrap">
+                    <img src="${rutaImagen}" alt="${nombreEs}" loading="lazy">
+                </div>
+                <div class="catalog-product-info">
+                    <h3 data-en="${nombreEn}" data-es="${nombreEs}">${nombreMostrado}</h3>
+                    <p data-en="${descEn}" data-es="${descEs}">${descMostrada}</p>
+                    <div class="catalog-prices">
+                        <span class="catalog-price-badge">
+                            <span class="catalog-price-label" data-en="Price" data-es="Precio">${idiomaActual === 'EN' ? 'Price' : 'Precio'}</span>
+                            <strong>Bs ${precioFinal.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>
+                        </span>
+                    </div>
+                    
+                    <div class="qty-counters-wrapper">
+                        <div class="qty-counter-row">
+                            <div class="qty-counter-label">
+                                <span class="qty-counter-price" style="color: #888; font-size: 0.85rem;" data-en="Quantity:" data-es="Cantidad:">${idiomaActual === 'EN' ? 'Quantity:' : 'Cantidad:'}</span>
+                            </div>
+                            <div class="qty-counter-controls">
+                                <button class="qc-btn qc-minus" aria-label="Restar">−</button>
+                                <span class="qc-num">1</span>
+                                <button class="qc-btn qc-plus" aria-label="Sumar">+</button>
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn">
+                            <span data-en="Add to cart" data-es="Añadir al carrito">${idiomaActual === 'EN' ? 'Add to cart' : 'Añadir al carrito'}</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            let localQty = 1;
+            const qcFmenos = tarjeta.querySelector('.qc-minus');
+            const qcFmas = tarjeta.querySelector('.qc-plus');
+            const qcNum = tarjeta.querySelector('.qc-num');
+            const addBtn = tarjeta.querySelector('.add-to-cart-btn');
+
+            qcFmas.addEventListener('click', () => {
+                localQty++;
+                qcNum.textContent = localQty;
+                qcNum.classList.add('qc-bump');
+                setTimeout(() => qcNum.classList.remove('qc-bump'), 280);
+            });
+
+            qcFmenos.addEventListener('click', () => {
+                if (localQty > 1) {
+                    localQty--;
+                    qcNum.textContent = localQty;
                 }
-            }
-        };
+            });
 
-        actualizarProducto("Microsoft Office 2024", "office-2024", precioOffice2024);
-        actualizarProducto("Microsoft Office 2021", "office-2021", precioOffice2021);
-        actualizarProducto("Windows 11 Profesional", "Windows-11.Professional", precioWin11);
-        actualizarProducto("Windows 10 Professional", "Windows-10-Professional", precioWin10);
-        actualizarProducto("Microsoft 365 (12 Meses)", "microsoft-365", precioM365);
-        actualizarProducto("Microsoft Project 2024 LTSC", "project-2024-ltsc", precioProject2024);
-        actualizarProducto("Adobe Creative Cloud - 1 Mes", "adobe-creative-cloud", precioAdobe);
-        actualizarProducto("Avast Premium Security - 1 Año", "avast-premium-security", precioAvast);
-        actualizarProducto("McAfee Total Protection - 1 Año", "mcafee-total-protection", precioMcAfee);
+            addBtn.addEventListener('click', () => {
+                if (!k[nombreEs]) k[nombreEs] = 0;
+                k[nombreEs] += localQty;
+                
+                if (typeof b === 'function') b('add_to_cart', { id: nombreEs });
+                if (typeof V === 'function') V();
+                
+                const floatingCart = document.getElementById('floating-cart');
+                const navCartBtn = document.getElementById('nav-cart-btn');
+                if (floatingCart) { floatingChart.classList.add('cart-pop'); setTimeout(() => floatingCart.classList.remove('cart-pop'), 400); }
+                if (navCartBtn) { navCartBtn.classList.add('cart-pop'); setTimeout(() => navCartBtn.classList.remove('cart-pop'), 400); }
+                
+                localQty = 1;
+                qcNum.textContent = localQty;
+            });
+
+            contenedorGrid.appendChild(tarjeta);
+        });
 
         if (typeof V === 'function') {
-            V(); 
+            V();
         }
 
     } catch (error) {
-        console.error("No se pudieron cargar los precios de SheetDB:", error);
+        console.error("Error al cargar productos dinámicos desde SheetDB:", error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', sincronizarPreciosSheetDB);
+document.addEventListener('DOMContentLoaded', cargarProductosDinamicos);
